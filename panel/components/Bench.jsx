@@ -54,7 +54,11 @@ export default function Bench({ run }) {
           target: mountRef.current,
           props: {
             events,
-            autoPlay: false,   // stillness: nothing moves until the user moves it
+            // DESIGN.md: the bench "plays once per run page, never loops".
+            // The one autoplay is the product demonstrating itself; a blank
+            // poster frame reads as broken, so the tape moves on arrival.
+            autoPlay: true,
+            loop: false,
             speed: 1,
             width: 960,
             showController: true,
@@ -76,13 +80,13 @@ export default function Bench({ run }) {
     const inst = playerRef.current;
     if (!inst) return;
     const ms = frames[i]?.t ?? 0;
-    // 2.x exposes the replayer indirectly; every path guarded so a missed
-    // seek still updates the readout instead of dying silently.
+    // Pause first so a user scrub holds the frame they chose. Every path
+    // guarded: a missed seek still updates the readout instead of dying.
     try {
+      if (typeof inst.pause === "function") inst.pause();
       if (typeof inst.goto === "function") return void inst.goto(ms);
       const rp = typeof inst.getReplayer === "function" ? inst.getReplayer() : null;
-      if (rp && typeof rp.pause === "function") return void rp.pause(ms);
-      if (rp && typeof rp.play === "function") return void (rp.pause(0), rp.pause(ms));
+      if (rp && typeof rp.pause === "function") rp.pause(ms);
     } catch (err) {
       console.error(err);
     }

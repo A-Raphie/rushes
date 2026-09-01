@@ -193,31 +193,31 @@ body {
 .nav-links a { color: var(--text-secondary); text-decoration: none; }
 .nav-links a:hover { color: var(--text-primary); text-decoration: underline; text-underline-offset: 4px; }
 
-.hero { max-width: var(--measure); margin: 0 auto; padding: 88px 24px 72px; text-align: center; }
-.hero-kicker { color: var(--text-secondary); margin: 0 0 20px; }
+.hero { max-width: var(--measure); margin: 0 auto; padding: 44px 24px 36px; text-align: center; }  /* fold fix: bench must enter the first viewport */
+.hero-kicker { color: var(--text-secondary); margin: 0 0 12px; }
 .hero-h1 {
   font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(2.5rem, 6vw, 4.25rem);
-  line-height: 1.05;
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  line-height: 1.06;
   letter-spacing: -0.02em;
   text-wrap: balance;
-  margin: 0 0 24px;
+  margin: 0 0 16px;
 }
-.hero-sub { font-size: 18px; color: var(--text-secondary); max-width: 34em; margin: 0 auto 36px; text-wrap: pretty; }
+.hero-sub { font-size: 16px; color: var(--text-secondary); max-width: 36em; margin: 0 auto 24px; text-wrap: pretty; }
 .hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
 .film-stage {
   background: var(--bg-film);
   color: var(--text-on-film);
-  padding: 56px 24px 48px;
+  padding: 32px 24px 40px;
 }
-.bench-kicker { color: var(--text-on-film-muted); text-align: center; margin: 0 0 28px; }
+.bench-kicker { color: var(--text-on-film-muted); text-align: center; margin: 0 0 16px; }
 
 .bench { margin: 0; max-width: 1020px; margin-inline: auto; }
 
 /* the slate: evidence card clamped to the strip's head */
-.slate { padding: 20px; margin: 0 0 20px; }
+.slate { padding: 16px 20px; margin: 0 0 14px; }
 .slate-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
 .serial-stamp {
   display: inline-block;

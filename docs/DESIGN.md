@@ -69,3 +69,7 @@ Everything in the consensus line · purple in any shade · emoji · glassmorphis
 | mono | JetBrains Mono, Fragment Mono | their font stack |
 | sans | Inter / Inter Display | their font stack |
 | radius | 4 / 6 / 10 px | their border-radius histogram |
+
+## Folds used
+
+- landing: paper-hero-compressed into film-stage-in-fold. Sacrifice: only whitespace; no text cut. Reason: the brief promised the bench above the fold and v1 shipped a text-only fold; caught by Raphie Sep 1.
