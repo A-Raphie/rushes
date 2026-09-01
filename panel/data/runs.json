@@ -1,5 +1,25 @@
 [
   {
+    "serial": "RUSH-2026-09-01-0003",
+    "kind": "url-flow",
+    "label": "Solari product pages live check",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://www.getsolari.com/browsers",
+      "https://www.getsolari.com/sandboxes",
+      "https://www.getsolari.com/desktops",
+      "https://docs.getsolari.com/"
+    ],
+    "durationSec": 18.8,
+    "tapeBytes": 1427393,
+    "sessionId": "ip-10-0-11-229:42db5323-46ce-4683-ab25-a9cc6ed300f0:cmtioo7ko021zo101irjk89q7:1788289713868.U1GMYGWXcPCxGfS00Oi4Tg",
+    "verdict": "verified",
+    "summary": "Four pages passed the live check. Each step returned ok true for browsers, sandboxes, desktops, and docs home.",
+    "tapeUrl": "/runs/RUSH-2026-09-01-0003/tape.ndjson",
+    "date": "2026-09-01",
+    "replayCaptured": true
+  },
+  {
     "serial": "RUSH-2026-09-01-0002",
     "kind": "url-flow",
     "label": "Solari product pages live check",
