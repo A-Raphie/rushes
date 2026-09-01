@@ -6,12 +6,12 @@ const LABELS = {
   pending: "pending",
 };
 
-export default function VerdictMark({ verdict }) {
+export default function VerdictMark({ verdict, tone = "amber" }) {
   const label = LABELS[verdict] ?? verdict;
   const cls =
     verdict === "verified" ? "is-pass" : verdict === "failed" ? "is-error" : "is-pending";
   return (
-    <span className={`verdict-mark ${cls}`}>
+    <span className={`verdict-mark ${cls} tone-${tone}`}>
       <svg viewBox="0 0 100 44" aria-hidden="true" className="verdict-circle">
         <ellipse
           cx="50"

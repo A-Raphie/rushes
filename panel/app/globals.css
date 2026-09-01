@@ -90,6 +90,8 @@
 
 html { background: var(--bg-base); }
 
+body { overflow-x: clip; }  /* audit P0: no child may drag the page wide */
+
 body {
   margin: 0;
   background: var(--bg-base);
@@ -236,7 +238,7 @@ body {
 
 /* the strip: cells on the dark stage */
 .bench-stage { border-radius: var(--radius-frame); border: 1px solid rgba(var(--film-rgb), 0); }
-.bench-mount { width: 100%; margin: 0 auto; overflow-x: auto; background: var(--bg-film-raise); border-radius: var(--radius-frame); display: flex; justify-content: center; }
+.bench-mount { width: 100%; margin: 0 auto; overflow-x: auto; background: var(--bg-film-raise); border-radius: var(--radius-frame); }
 .bench-skeleton {
   width: 100%; height: 540px; margin: 0 auto;
   background: var(--bg-film-raise); border-radius: var(--radius-frame);
@@ -253,7 +255,8 @@ body {
 }
 .bench-strip-label { align-self: center; color: var(--text-on-film-muted); flex-shrink: 0; padding-right: 8px; }
 .frame-cell {
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
   display: flex; flex-direction: column; gap: 4px; align-items: flex-start;
   min-height: 44px;                    /* Fitts: strip is interactive */
   padding: 8px 12px;
@@ -271,13 +274,14 @@ body {
 .frame-host { font-size: 11px; color: var(--text-on-film-muted); letter-spacing: 0.04em; }
 
 /* verdict: grease pencil around a text label */
-.verdict-mark { position: relative; display: inline-flex; align-items: center; padding: 6px 14px; }
+.verdict-mark { position: relative; display: inline-flex; align-items: center; padding: 10px 22px; }  /* stamp scales as a unit; ellipse must never cut letterforms */
 .verdict-circle { position: absolute; inset: 0; width: 100%; height: 100%; }
 .verdict-mark.is-pass { color: var(--accent); }        /* the pencil marks pass */
 .verdict-mark.is-error { color: var(--status-error); }
 .verdict-mark.is-pending { color: var(--status-pending); }
-.verdict-text { font-weight: 700; font-size: 13px; }
+.verdict-text { font-weight: 700; font-size: 13px; letter-spacing: 0.08em; white-space: nowrap; }
 .verdict-mark.is-pass .verdict-text { color: var(--text-primary); }
+.verdict-mark.tone-ink { color: var(--text-primary); }  /* one amber per screen: ink stamps on paper */
 .verdict-mark.is-error .verdict-text { color: var(--status-error); }
 .verdict-mark.is-pending .verdict-text { color: var(--status-pending); }
 
@@ -336,4 +340,11 @@ body {
   .works-list { grid-template-columns: 1fr; }
   .beat { grid-template-columns: 72px 1fr; }
   .hero { padding: 56px 20px 48px; }
+}
+
+/* the replayer's own body is white by default; evidence is letterboxed in
+   film ink on the stage, never in paper white */
+.bench-mount .replayer-wrapper {
+  background: var(--bg-film);
+  margin: 0 auto;
 }

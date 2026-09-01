@@ -59,25 +59,66 @@ export default function Bench({ run }) {
         const Player = mod.default ?? mod.Player;
         import("rrweb-player/dist/style.css");
 
-        // The tape fills the stage it is given: the recorded viewport is 1280
-        // wide, so big screens scale to 1:1 instead of leaving the bench a
-        // fixed-size island in the dark (caught on a 1710px window).
-        const stageWidth = Math.max(640, Math.min(1280, mountRef.current?.clientWidth ?? 960));
+        // The tape fills the stage it is given, up to the recorded viewport
+        // (1280). No floor above the container: a 640px floor overflowed 375px
+        // phones and dragged the whole page wide (audit P0).
+        const stageWidth = Math.min(1280, Math.max(280, mountRef.current?.clientWidth ?? 960));
 
         playerRef.current = new Player({
           target: mountRef.current,
           props: {
             events,
-            // DESIGN.md: the bench "plays once per run page, never loops".
-            // The one autoplay is the product demonstrating itself; a blank
-            // poster frame reads as broken, so the tape moves on arrival.
-            autoPlay: true,
+            // Stillness doctrine: the tape does not move on its own on load.
+            // It posters on the run's final frame, then plays ONCE when the
+            // bench scrolls into view (user-driven adjacency), and never
+            // loops. Reduced-motion users get the poster, never the play.
+            autoPlay: false,
             loop: false,
             speed: 1,
             width: stageWidth,
             showController: true,
           },
         });
+        // Poster: park on the last frame so the bench never shows white.
+        // The replayer initializes asynchronously, so retry until the seek
+        // takes; a single immediate call silently no-ops (audit P1).
+        let tries = 0;
+        const posterTimer = setInterval(() => {
+          tries += 1;
+          const rp = replayerOf(playerRef.current);
+          if (rp && typeof rp.pause === "function") {
+            try {
+              rp.pause(metas[metas.length - 1].t);
+            } catch {
+              /* stays on the poster retry path */
+            }
+            clearInterval(posterTimer);
+          } else if (tries > 20) {
+            clearInterval(posterTimer);
+          }
+        }, 300);
+        // Play once when the bench becomes visible: rewind to the head so
+        // the run plays from its real beginning, not from the poster. The
+        // visitor's scroll is the trigger; reduced motion never plays.
+        const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+        const inst = playerRef.current;
+        if (!reduced && typeof IntersectionObserver !== "undefined") {
+          const io = new IntersectionObserver(
+            (entries) => {
+              if (entries.some((e) => e.isIntersecting)) {
+                try {
+                  inst?.goto?.(0);
+                  inst?.play?.();
+                } catch {
+                  /* play is best-effort; the controller still works */
+                }
+                io.disconnect();
+              }
+            },
+            { threshold: 0.35 },
+          );
+          io.observe(mountRef.current);
+        }
         if (alive) setStatus("ready");
       } catch (err) {
         console.error(err);
@@ -127,9 +168,25 @@ export default function Bench({ run }) {
     }
   }
 
+  // Power users scrub with the keyboard: arrows walk the real frames.
+  function onScrubKey(e) {
+    if (e.key === "ArrowLeft" && active > 0) {
+      e.preventDefault();
+      seek(active - 1);
+    } else if (e.key === "ArrowRight" && active < frames.length - 1) {
+      e.preventDefault();
+      seek(active + 1);
+    }
+  }
+
   return (
-    <figure className="bench" aria-label={`Cutting bench: run ${run.serial}`}>
-      <Slate run={run} />
+    <figure
+      className="bench"
+      aria-label={`Cutting bench: run ${run.serial}`}
+      tabIndex={0}
+      onKeyDown={onScrubKey}
+    >
+      <Slate run={run} tone="ink" />
 
       <div className="bench-stage">
         {status === "loading" && (
@@ -172,12 +229,12 @@ export default function Bench({ run }) {
   );
 }
 
-function Slate({ run }) {
+function Slate({ run, tone = "amber" }) {
   return (
     <div className="slate card">
       <div className="slate-row">
         <SerialStamp serial={run.serial} />
-        <VerdictMark verdict={run.verdict} />
+        <VerdictMark verdict={run.verdict} tone={tone} />
       </div>
       <div className="slate-grid">
         <div>

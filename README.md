@@ -1,91 +1,62 @@
-# Solari Cookbook
+# Rushes
 
-Short, runnable examples for [Solari](https://getsolari.com) — cloud browsers,
-sandboxes, and desktops behind one API key.
+Every agent run owes the world a demo. Rushes pays up.
 
-Every example in this repo is a complete program you can run in under a minute.
-They are deliberately small: one idea each, no framework, no scaffolding to read
-past. Copy one into your project and change the parts you care about.
+You point it at a task. The task executes on Solari (cloud browser, sandbox, or
+desktop). You get the tape back: an auto-cut clip, a serial-numbered manifest,
+and a replay hosted on Solari\'s own servers. Not your screen recording. Not
+your claim.
 
-## Examples
+Live panel: https://rushes-kappa.vercel.app
 
-### Cloud browser
+Named after film dailies: rushes are the day\'s raw footage, watched each
+evening to verify what was actually captured. Today\'s rushes are what your
+agents shot.
 
-| Example | Language | What it shows |
-| --- | --- | --- |
-| [browser-quickstart-ts](examples/browser-quickstart-ts) | TypeScript | Launch a browser, open a page, read it |
-| [browser-quickstart-py](examples/browser-quickstart-py) | Python | Launch a browser, open a page, read it |
-| [browser-stealth-proxy-ts](examples/browser-stealth-proxy-ts) | TypeScript | Stealth mode + residential proxy egress |
-| [browser-profiles-ts](examples/browser-profiles-ts) | TypeScript | Log in once, reuse the session forever |
-| [browser-session-recording-py](examples/browser-session-recording-py) | Python | Record a session, download the replay |
+## Try it
 
-### Sandbox
+Record a real session and fetch its notarized replay in under two minutes:
 
-| Example | Language | What it shows |
-| --- | --- | --- |
-| [sandbox-quickstart-ts](examples/sandbox-quickstart-ts) | TypeScript | Run a command, write and read files |
-| [sandbox-code-interpreter-py](examples/sandbox-code-interpreter-py) | Python | Stateful Python kernel for agent loops |
-| [sandbox-port-preview-ts](examples/sandbox-port-preview-ts) | TypeScript | Expose a server in the VM on a public URL |
-
-### Desktop
-
-| Example | Language | What it shows |
-| --- | --- | --- |
-| [desktop-computer-use-py](examples/desktop-computer-use-py) | Python | Screenshot, click, and type on a Linux GUI |
-
-## Running an example
-
-Each directory is self-contained.
-
-```bash
-git clone https://github.com/solari-sdk/solari-cookbook.git
-cd solari-cookbook/examples/browser-quickstart-ts
-
-npm install                          # or: pip install -r requirements.txt
-export SOLARI_API_KEY=slr_live_...   # grab one at console.getsolari.com
-npm start                            # or: python main.py
+```
+git clone https://github.com/A-Raphie/rushes.git
+cd rushes/examples/browser-quickstart-ts
+npm install
+export SOLARI_API_KEY=slr_live_...   # console.getsolari.com, free tier
+npx tsx recording-probe2.ts
 ```
 
-One `slr_live_` key works across browsers, sandboxes, and desktops, and every
-product bills to the same balance.
+You will get: the recorded session\'s page titles, a presigned replay URL from
+Solari\'s storage, and a downloaded NDJSON tape of the run. Open the panel and
+the landing plays a real recorded run through the same pipeline.
 
-## Which product do I want?
+## What a receipt looks like
 
-- **Cloud browser** — you need a *web page*: scraping, testing, filling forms,
-  anything Playwright or Puppeteer would do locally. Adds stealth, managed
-  proxies, captcha solving, profiles, and session recording.
-- **Sandbox** — you need to *run code*: an LLM's Python, an untrusted build, a
-  data job. A headless microVM that boots from a snapshot in about a second.
-- **Desktop** — you need a *screen*: computer-use agents, GUI apps, anything
-  that has to be clicked. A sandbox plus X11 and a live VNC stream.
+Every run writes a manifest: see [docs/manifest-schema.md](docs/manifest-schema.md).
+Serial, surface, duration, tape size, pages visited, verdict, cost. The
+landing page renders one: RUSH-2026-09-01-0001.
 
-## Gotchas the examples encode
+## Honest status
 
-Things that cost you an afternoon if you meet them cold:
+| Capability | Status | Notes |
+|---|---|---|
+| Recorded browser sessions + hosted replay | works | verified Sep 1 on the free tier |
+| Sandboxes: exec, files, public preview URL | works | verified Sep 1 |
+| Desktops | paid tier only | free tier rejects desktop creation; verified |
+| Task runner (spec in, run out) | building | lands next |
+| Per-run receipt pages | building | schema committed |
+| Clip assembler | building | ffmpeg pipeline proven on prior projects |
 
-- **TypeScript: call `await solari.close()`.** The browser client keeps a
-  loopback proxy open for connection retries. Skip the close and your script
-  prints its output and then hangs forever instead of exiting.
-- **Recording is per session, not per account.** Pass `recording: true` when you
-  create the session; without it the replay endpoint 404s forever. The upload is
-  async after release, so poll for ~30s before giving up.
-- **Sandbox commands are not shell-interpreted.** `run("ls -la")` looks for a
-  binary named `ls -la`. Put argv in `args`, or run `sh -c` explicitly.
-- **`kill()`, not `close()`, ends a VM.** `close()` drops your local control
-  channel; the VM keeps running until its idle timeout.
-- **`timeoutMs` is a rolling idle window**, not a hard deadline — it resets on
-  every use.
+## Costs, on the record
 
-## Links
+Built and verified on the Solari free tier ($3.00 monthly credits). Phase 0
+verification spend: under $0.01. The credit log lives in
+[docs/PHASE0-RESULTS.md](docs/PHASE0-RESULTS.md).
 
-- Docs — [docs.getsolari.com](https://docs.getsolari.com)
-- Console — [console.getsolari.com](https://console.getsolari.com)
-- Changelog — [changelog.getsolari.com](https://changelog.getsolari.com)
-- Questions — [hello@getsolari.com](mailto:hello@getsolari.com)
+## Design
 
-## Contributing
+[docs/DESIGN.md](docs/DESIGN.md): the light-table direction, the cutting-bench
+signature, and the sponsor tokens mined from getsolari.com\'s CSS.
 
-New examples are welcome. Keep them small, make them run end-to-end against the
-real API, and put anything surprising in a comment right where it bites.
-
-MIT licensed.
+Built on [Solari](https://getsolari.com), forked from the
+[solari-cookbook](https://github.com/solari-sdk/solari-cookbook) for the
+Pinetree Research build challenge.

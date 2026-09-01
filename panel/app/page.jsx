@@ -28,15 +28,15 @@ export default function Landing() {
           </h1>
           <p className="hero-sub">
             Rushes runs your task on Solari and hands back the receipt: the
-            clip, the manifest, and a replay hosted on Solari&apos;s own
-            servers. Not your screen recording. Not your claim.
+            clip, the manifest, a verdict, and a replay hosted on Solari&apos;s
+            own servers. Not your screen recording. Not your claim.
           </p>
           <div className="hero-ctas">
-            <a className="btn btn-primary btn-lg" href="https://github.com/A-Raphie/rushes#try-it">
-              Point it at a task
-            </a>
-            <a className="btn btn-ghost btn-lg" href="#bench">
+            <a className="btn btn-primary btn-lg" href="#bench">
               Watch the first tape
+            </a>
+            <a className="btn btn-ghost btn-lg" href="https://github.com/A-Raphie/rushes#try-it">
+              Point it at a task
             </a>
           </div>
         </section>
@@ -68,8 +68,9 @@ export default function Landing() {
             <li className="beat">
               <span className="mono-num beat-tc">00:19.7</span>
               <p>
-                <strong>You hold the tape.</strong> The manifest, the replay link,
-                the serial. If anyone doubts the run, the tape answers.
+                <strong>You hold the tape.</strong> The manifest, the replay
+                link, the serial. 19.7 seconds includes the replay fetch. If
+                anyone doubts the run, the tape answers.
               </p>
             </li>
           </ol>
