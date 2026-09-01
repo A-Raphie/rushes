@@ -27,9 +27,9 @@ export default function Landing() {
             Here is the tape.
           </h1>
           <p className="hero-sub">
-            Point Rushes at a task. It runs on Solari and you get the receipt: an
-            auto-cut clip, a serial-numbered manifest, and a replay hosted on
-            Solari&apos;s own servers. Not your screen recording. Not your claim.
+            Rushes runs your task on Solari and hands back the receipt: the
+            clip, the manifest, and a replay hosted on Solari&apos;s own
+            servers. Not your screen recording. Not your claim.
           </p>
           <div className="hero-ctas">
             <a className="btn btn-primary btn-lg" href="https://github.com/A-Raphie/rushes#try-it">

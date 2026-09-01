@@ -3,8 +3,8 @@
 /* THE CUTTING BENCH: the signature (docs/DESIGN.md).
    A contact-sheet strip of one run: every cell is a real frame bound to the
    tape's own Meta events; the slate is clamped to its head; scrubbing seeks
-   the actual recorded evidence. Plays once, never loops, only moves when
-   the user moves it (stillness doctrine). */
+   the actual recorded evidence. Plays once on arrival, never loops; the
+   strip's active cell always reports the frame the tape is really on. */
 import { useEffect, useRef, useState } from "react";
 import VerdictMark from "./VerdictMark";
 
@@ -19,6 +19,15 @@ function hostOf(href) {
 function tc(ms) {
   const s = ms / 1000;
   return `${String(Math.floor(s / 60)).padStart(2, "0")}:${(s % 60).toFixed(1).padStart(4, "0")}`;
+}
+
+function replayerOf(inst) {
+  if (!inst) return null;
+  try {
+    return typeof inst.getReplayer === "function" ? inst.getReplayer() : null;
+  } catch {
+    return null;
+  }
 }
 
 export default function Bench({ run }) {
@@ -50,6 +59,11 @@ export default function Bench({ run }) {
         const Player = mod.default ?? mod.Player;
         import("rrweb-player/dist/style.css");
 
+        // The tape fills the stage it is given: the recorded viewport is 1280
+        // wide, so big screens scale to 1:1 instead of leaving the bench a
+        // fixed-size island in the dark (caught on a 1710px window).
+        const stageWidth = Math.max(640, Math.min(1280, mountRef.current?.clientWidth ?? 960));
+
         playerRef.current = new Player({
           target: mountRef.current,
           props: {
@@ -60,7 +74,7 @@ export default function Bench({ run }) {
             autoPlay: true,
             loop: false,
             speed: 1,
-            width: 960,
+            width: stageWidth,
             showController: true,
           },
         });
@@ -75,6 +89,27 @@ export default function Bench({ run }) {
     };
   }, [run.tapeUrl]);
 
+  // The strip must agree with the tape: derive the active frame from the
+  // replayer's real clock, not from clicks alone (the parked-at-end state
+  // highlighted frame 1 while the tape sat on frame 4).
+  useEffect(() => {
+    if (status !== "ready" || frames.length === 0) return;
+    const id = setInterval(() => {
+      try {
+        const t = replayerOf(playerRef.current)?.getCurrentTime?.();
+        if (typeof t !== "number" || Number.isNaN(t)) return;
+        let idx = 0;
+        for (let i = 0; i < frames.length; i++) {
+          if (frames[i].t <= t) idx = i;
+        }
+        setActive(idx);
+      } catch {
+        /* a missed poll keeps the last known frame */
+      }
+    }, 250);
+    return () => clearInterval(id);
+  }, [status, frames]);
+
   function seek(i) {
     setActive(i);
     const inst = playerRef.current;
@@ -85,7 +120,7 @@ export default function Bench({ run }) {
     try {
       if (typeof inst.pause === "function") inst.pause();
       if (typeof inst.goto === "function") return void inst.goto(ms);
-      const rp = typeof inst.getReplayer === "function" ? inst.getReplayer() : null;
+      const rp = replayerOf(inst);
       if (rp && typeof rp.pause === "function") rp.pause(ms);
     } catch (err) {
       console.error(err);
@@ -126,6 +161,12 @@ export default function Bench({ run }) {
             </button>
           ))}
         </figcaption>
+
+        <p className="bench-note caption">
+          Recorded by the Solari cloud browser. The replay is notarized on
+          Solari&apos;s servers; presigned links expire in 15 minutes and are
+          re-fetched by the engine.
+        </p>
       </div>
     </figure>
   );
@@ -156,10 +197,6 @@ function Slate({ run }) {
           <span className="slate-val mono-num">{run.date}</span>
         </div>
       </div>
-      <p className="slate-note caption">
-        Recorded by the Solari cloud browser. The replay is notarized on Solari&apos;s
-        servers; presigned links expire in 15 minutes and are re-fetched by the engine.
-      </p>
     </div>
   );
 }
