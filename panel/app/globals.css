@@ -234,7 +234,7 @@ body {
 .slate-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .slate-key { display: block; color: var(--text-muted); margin-bottom: 4px; }
 .slate-val { font-size: 15px; color: var(--text-primary); font-weight: 500; }  /* washed out at 400; legibility floor */
-.bench-note { margin: 12px auto 0; max-width: 1320px; color: var(--text-on-film-muted); }
+.bench-note { margin: 12px auto 0; max-width: 1320px; color: var(--text-on-film-muted); text-align: center; }
 
 /* the strip: cells on the dark stage */
 .bench-stage { border-radius: var(--radius-frame); border: 1px solid rgba(var(--film-rgb), 0); }
@@ -247,7 +247,7 @@ body {
 .bench-error { color: var(--text-on-film); font-family: var(--font-mono); font-size: 14px; padding: 24px; }
 
 .bench-strip {
-  display: flex; align-items: stretch; gap: 8px;
+  display: flex; align-items: stretch; gap: 8px; justify-content: safe center;
   margin-top: 16px; overflow-x: auto;
   padding-bottom: 4px;
   -webkit-mask-image: linear-gradient(to right, black 0, black calc(100% - 24px), transparent 100%);
