@@ -1,0 +1,10 @@
+{
+  "kind": "url-flow",
+  "name": "Solari product pages live check",
+  "steps": [
+    { "label": "browsers page", "url": "https://getsolari.com/browsers", "expect": "Browser", "dwellMs": 2000 },
+    { "label": "sandboxes page", "url": "https://getsolari.com/sandboxes", "expect": "Sandbox", "dwellMs": 2000 },
+    { "label": "desktops page", "url": "https://getsolari.com/desktops", "expect": "Desktop", "dwellMs": 2000 },
+    { "label": "docs home", "url": "https://docs.getsolari.com/", "expect": "Solari", "dwellMs": 2000 }
+  ]
+}

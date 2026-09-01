@@ -1,0 +1,42 @@
+[
+  {
+    "serial": "RUSH-2026-09-01-0002",
+    "kind": "url-flow",
+    "label": "Solari product pages live check",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://www.getsolari.com/browsers",
+      "https://www.getsolari.com/sandboxes",
+      "https://www.getsolari.com/desktops",
+      "https://docs.getsolari.com/"
+    ],
+    "durationSec": 18.5,
+    "tapeBytes": 1428765,
+    "sessionId": "ip-10-0-11-229:96c6281c-e03d-401f-b9cd-0c000d90a64b:cmtioo7ko021zo101irjk89q7:1788287050880.Te-M7bqsHPbE9hbfY_5mVQ",
+    "verdict": "verified",
+    "summary": "4/4 checks passed in 18.5s on the recorded cloud browser; tape 1395 KB and the Solari-hosted replay were captured.",
+    "tapeUrl": "/runs/RUSH-2026-09-01-0002/tape.ndjson",
+    "date": "2026-09-01",
+    "replayCaptured": true
+  },
+  {
+    "serial": "RUSH-2026-09-01-0001",
+    "kind": "phase0-verification",
+    "label": "Engine proof: recorded session, replay fetched, tape rendered",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "about:blank",
+      "https://example.com/",
+      "https://news.ycombinator.com/",
+      "https://getsolari.com/"
+    ],
+    "durationSec": 6.8,
+    "tapeBytes": 537120,
+    "sessionId": "ip-10-0-11-12:7934fde3-31a3-45fe-b4ca-20d598647e56:cmtioo7ko021zo101irjk89q7:1788269501680.w3plRHawn4cU0_5Hvx-viQ",
+    "verdict": "verified",
+    "summary": "3 pages navigated on the recorded cloud browser; 537 KB tape downloaded and the Solari-hosted replay URL resolved after release.",
+    "tapeUrl": "/runs/phase0/tape.ndjson",
+    "date": "2026-09-01",
+    "replayCaptured": true
+  }
+]

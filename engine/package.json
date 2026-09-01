@@ -1,0 +1,14 @@
+{
+  "name": "rushes-engine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "run": "tsx run.ts"
+  },
+  "dependencies": {
+    "@solarisdk/browser": "^0.1.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2"
+  }
+}

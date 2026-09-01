@@ -81,21 +81,27 @@ export default function Bench({ run }) {
         });
         // Poster: park on the last frame so the bench never shows white.
         // The replayer initializes asynchronously, so retry until the seek
-        // takes; a single immediate call silently no-ops (audit P1).
+        // actually TOOK (verified by the replayer's own clock) — a single
+        // immediate call silently no-ops, and checking that pause merely
+        // exists clears the retry too early (audit + receipt pass).
+        const target = metas.length ? metas[metas.length - 1].t : 0;
         let tries = 0;
         const posterTimer = setInterval(() => {
           tries += 1;
           const rp = replayerOf(playerRef.current);
-          if (rp && typeof rp.pause === "function") {
+          if (rp && typeof rp.pause === "function" && typeof rp.getCurrentTime === "function") {
             try {
-              rp.pause(metas[metas.length - 1].t);
+              rp.pause(target);
+              const now = rp.getCurrentTime();
+              if (typeof now === "number" && Math.abs(now - target) < 2000) {
+                clearInterval(posterTimer);
+                return;
+              }
             } catch {
               /* stays on the poster retry path */
             }
-            clearInterval(posterTimer);
-          } else if (tries > 20) {
-            clearInterval(posterTimer);
           }
+          if (tries > 20) clearInterval(posterTimer);
         }, 300);
         // Play once when the bench becomes visible: rewind to the head so
         // the run plays from its real beginning, not from the poster. The
