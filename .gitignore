@@ -1,8 +1,4 @@
-node_modules/
-package-lock.json
 .env
-__pycache__/
-*.pyc
-.venv/
-venv/
-screenshot.png
+node_modules/
+runs/
+*.log
