@@ -7,7 +7,7 @@ desktop). You get the tape back: an auto-cut clip, a serial-numbered manifest,
 and a replay hosted on Solari\'s own servers. Not your screen recording. Not
 your claim.
 
-Live panel: https://rushes-kappa.vercel.app
+Live panel: https://tryrushes.vercel.app
 
 Named after film dailies: rushes are the day\'s raw footage, watched each
 evening to verify what was actually captured. Today\'s rushes are what your
