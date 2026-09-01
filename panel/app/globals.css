@@ -1,0 +1,339 @@
+/* ============================================================
+   RUSHES SEMANTIC TOKENS
+   Governing gate: docs/DESIGN.md (locked v2).
+   Values mined from getsolari.com CSS on Sep 1 2026, not invented.
+   Zero raw hex allowed outside this file: a hit is a bug (ui-craft S0/S3).
+   ============================================================ */
+
+:root {
+  /* Elevation ladder: light table first, DESIGN.md axis 1.
+     Dailies are reviewed on a light table; the page is the table. */
+  --bg-base: #e7e7e2;      /* the table surface (their paper, 33 uses on getsolari.com) */
+  --bg-surface: #f9fbfa;   /* receipts and cards lift off the table (their near-white) */
+  --bg-subtle: #deded8;    /* muted insets and table stripes; #c8c8c3 lifted one step for stripe use */
+  --bg-overlay: #f9fbfa;   /* popovers; solid over blur per craft rules */
+
+  /* The film stage: the dark band the strip lies on.
+     Section-level, not a theme: evidence on paper, footage on dark. */
+  --bg-film: #0f1514;                    /* their ink/film neutral */
+  --bg-film-raise: #151e1d;              /* their dark raise, for slate blocks on the stage */
+  --text-on-film: #e7e7e2;
+  --text-on-film-muted: #939599;         /* their grey; large/mono use only on film */
+
+  /* Text tiers: exactly three (Hick's). */
+  --text-primary: #0f1514;               /* ink */
+  --text-secondary: #2a3c3a;             /* their hairline teal doing text duty; passes 4.5:1 on paper */
+  --text-muted: #5f6462;                 /* #878787 darkened until 4.5:1 on paper; floor is not negotiable */
+
+  /* Border scale: hairlines only, no shadows (DESIGN.md elevation axis). */
+  --border-default: rgba(42, 60, 58, 0.18);
+  --border-strong: #2a3c3a;              /* hover and active edges only */
+
+  /* Accent triple: the grease pencil. One amber-marked element per screen
+     (attention is zero-sum). */
+  --accent: #f5b301;                     /* their --accent rgb(245,179,1) */
+  --accent-subtle: rgba(245, 179, 1, 0.16);
+  --accent-foreground: #0f1514;          /* ink reads on amber; white does not */
+  --accent-rgb: 245 179 1;
+
+  /* Status scale: verdict chips. Always paired with a text label;
+     color alone is never the signal. Desaturated on purpose:
+     claimcheck owns saturated rust/green, Rushes must not borrow it. */
+  --status-pass: #2e6b4e;        /* desaturated green, text-capable on paper */
+  --status-pending: #5f6462;
+  --status-error: #8a4a3b;       /* desaturated brick, distinct from claimcheck #9c3b24 */
+  --status-neutral: #5f6462;
+  --status-pass-bg: rgba(46, 107, 78, 0.12);
+  --status-error-bg: rgba(138, 74, 59, 0.12);
+
+  /* Film-channel twin: for amber-on-film surfaces using opacity math. */
+  --film-rgb: 15 21 20;
+
+  /* Radius: their histogram is 4 / 6 / 10. Name roles, not sizes. */
+  --radius-input: 4px;
+  --radius-card: 6px;
+  --radius-frame: 10px;    /* contact-sheet frames: the outermost object */
+  --radius-pill: 999px;
+
+  /* Type: mono-first (DESIGN.md axis 2). JetBrains Mono is Solari's own
+     brand mono, verified in their CSS: the tape speaks in their voice. */
+  --font-mono: "JetBrains Mono", "Fragment Mono", ui-monospace, "SF Mono", monospace;
+  --font-sans: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --tracking-micro: 0.12em;  /* craft floor: all-caps microcopy +5-12% minimum */
+  --measure: 66ch;           /* body measure 60-75ch, measured not felt */
+
+  /* Motion: stillness doctrine. The only autonomous duration in the app is
+     zero; everything else is user-driven (scrub, hover, focus). */
+  --dur-fast: 120ms;
+  --dur-med: 200ms;
+}
+
+/* Screening room: the easter egg theme (DESIGN.md catalog adoption).
+   Swap values only; if a component needs its own dark rules, the
+   abstraction leaked. Off the main flow on purpose. */
+[data-theme="projection"] {
+  --bg-base: #0f1514;
+  --bg-surface: #151e1d;
+  --bg-subtle: #1a2523;
+  --bg-overlay: #151e1d;
+  --text-primary: #e7e7e2;
+  --text-secondary: #c8c8c3;
+  --text-muted: #939599;   /* on film, their grey passes for body sizes */
+  --border-default: rgba(231, 231, 226, 0.14);
+  --border-strong: #c8c8c3;
+  --text-on-film: #e7e7e2;
+}
+
+/* ---------- class layer: the kit's material ---------- */
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg-base); }
+
+body {
+  margin: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.45;         /* craft floor: 120-145% */
+}
+
+::focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* buttons: verbs, 44px targets, no glow ever */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;          /* Fitts: thumb target */
+  padding: 0 20px;
+  border-radius: var(--radius-input);
+  border: 1px solid transparent;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--dur-fast) ease-out, background var(--dur-fast) ease-out;
+}
+.btn:active { transform: scale(0.96); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+.btn-primary:hover { filter: brightness(1.05); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+.btn-ghost:hover { background: var(--bg-subtle); }
+
+.btn-lg { min-height: 52px; padding: 0 28px; font-size: 15px; }
+
+/* card: receipt paper */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-card);
+}
+
+/* micro: tracked mono caps, the manifest's voice */
+.micro {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+}
+
+.caption {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* numbers never jitter */
+.mono-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "zero";
+}
+
+.divider { border: 0; border-top: 1px solid var(--border-default); }
+
+/* reduce motion: honor the media query AND a per-app kill switch that
+   keeps transitionend firing (0.01ms, not 0) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+[data-reduce-motion] *, [data-reduce-motion] *::before, [data-reduce-motion] *::after {
+  transition-duration: 0.01ms !important;
+  animation-duration: 0.01ms !important;
+}
+
+/* ---------- screens: landing + runs (kit consumes tokens only) ---------- */
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-default);
+}
+.nav-brand { font-weight: 700; font-size: 14px; color: var(--text-primary); text-decoration: none; }
+.nav-links { display: flex; gap: 24px; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; }
+.nav-links a:hover { color: var(--text-primary); text-decoration: underline; text-underline-offset: 4px; }
+
+.hero { max-width: var(--measure); margin: 0 auto; padding: 88px 24px 72px; text-align: center; }
+.hero-kicker { color: var(--text-secondary); margin: 0 0 20px; }
+.hero-h1 {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0 0 24px;
+}
+.hero-sub { font-size: 18px; color: var(--text-secondary); max-width: 34em; margin: 0 auto 36px; text-wrap: pretty; }
+.hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+.film-stage {
+  background: var(--bg-film);
+  color: var(--text-on-film);
+  padding: 56px 24px 48px;
+}
+.bench-kicker { color: var(--text-on-film-muted); text-align: center; margin: 0 0 28px; }
+
+.bench { margin: 0; max-width: 1020px; margin-inline: auto; }
+
+/* the slate: evidence card clamped to the strip's head */
+.slate { padding: 20px; margin: 0 0 20px; }
+.slate-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.serial-stamp {
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-input);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+}
+.slate-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.slate-key { display: block; color: var(--text-muted); margin-bottom: 4px; }
+.slate-val { font-size: 15px; color: var(--text-primary); font-weight: 500; }  /* washed out at 400; legibility floor */
+.slate-note { margin: 14px 0 0; }
+
+/* the strip: cells on the dark stage */
+.bench-stage { border-radius: var(--radius-frame); border: 1px solid rgba(var(--film-rgb), 0); }
+.bench-mount { width: min(960px, 100%); margin: 0 auto; overflow-x: auto; background: var(--bg-film-raise); border-radius: var(--radius-frame); }
+.bench-skeleton {
+  width: min(960px, 100%); height: 540px; margin: 0 auto;
+  background: var(--bg-film-raise); border-radius: var(--radius-frame);
+}
+.bench-skeleton div { width: 100%; height: 100%; opacity: 0.5; }
+.bench-error { color: var(--text-on-film); font-family: var(--font-mono); font-size: 14px; padding: 24px; }
+
+.bench-strip {
+  display: flex; align-items: stretch; gap: 8px;
+  margin-top: 16px; overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-mask-image: linear-gradient(to right, black 0, black calc(100% - 24px), transparent 100%);
+  mask-image: linear-gradient(to right, black 0, black calc(100% - 24px), transparent 100%);
+}
+.bench-strip-label { align-self: center; color: var(--text-on-film-muted); flex-shrink: 0; padding-right: 8px; }
+.frame-cell {
+  flex-shrink: 0;
+  display: flex; flex-direction: column; gap: 4px; align-items: flex-start;
+  min-height: 44px;                    /* Fitts: strip is interactive */
+  padding: 8px 12px;
+  background: var(--bg-film-raise);
+  color: var(--text-on-film);
+  border: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+  border-radius: var(--radius-input);
+  cursor: pointer;
+  font-family: var(--font-mono);
+}
+.frame-cell:hover { border-color: var(--border-strong); }
+.frame-cell.is-active { border-bottom-color: var(--accent); }  /* the amber edge, one per strip */
+.frame-tc { font-size: 13px; }
+.frame-host { font-size: 11px; color: var(--text-on-film-muted); letter-spacing: 0.04em; }
+
+/* verdict: grease pencil around a text label */
+.verdict-mark { position: relative; display: inline-flex; align-items: center; padding: 6px 14px; }
+.verdict-circle { position: absolute; inset: 0; width: 100%; height: 100%; }
+.verdict-mark.is-pass { color: var(--accent); }        /* the pencil marks pass */
+.verdict-mark.is-error { color: var(--status-error); }
+.verdict-mark.is-pending { color: var(--status-pending); }
+.verdict-text { font-weight: 700; font-size: 13px; }
+.verdict-mark.is-pass .verdict-text { color: var(--text-primary); }
+.verdict-mark.is-error .verdict-text { color: var(--status-error); }
+.verdict-mark.is-pending .verdict-text { color: var(--status-pending); }
+
+/* beats: timecode rows on paper */
+.beats, .works-with, .runs-teaser { max-width: 760px; margin: 0 auto; padding: 56px 24px; }
+.beats-h2 { font-weight: 400; font-size: 1.7rem; letter-spacing: -0.01em; margin: 0 0 28px; }
+.beats-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.beat { display: grid; grid-template-columns: 92px 1fr; gap: 16px; align-items: baseline; }
+.beat-tc { font-size: 15px; color: var(--text-secondary); }
+.beat p { margin: 0; color: var(--text-secondary); }
+.beat strong { color: var(--text-primary); }
+
+/* what it works with */
+.works-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.work-chip { padding: 14px 16px; display: grid; gap: 4px; }
+.work-chip .micro { color: var(--text-primary); }
+.work-chip-pending { border-style: dashed; }
+
+/* runs teaser + rows */
+.runs-teaser-head { display: flex; justify-content: space-between; align-items: baseline; }
+.runs-all { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border-strong); padding-bottom: 2px; }
+.run-row {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 16px 18px; margin-top: 16px;
+  color: var(--text-primary); text-decoration: none;
+  transition: background var(--dur-fast) ease-out;
+}
+.run-row:hover { background: var(--bg-subtle); }
+.run-row-label { flex: 1; min-width: 200px; font-size: 15px; }
+
+/* runs page */
+.runs-main { max-width: 760px; margin: 0 auto; padding: 56px 24px; }
+.runs-intro { margin: -12px 0 32px; }
+.runs-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.run-card { padding: 20px; }
+.run-card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.run-card-label { margin: 0 0 16px; font-size: 15px; color: var(--text-secondary); }
+.run-card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0 0 14px; }
+.run-card-grid dt { color: var(--text-muted); margin-bottom: 4px; }
+.run-card-grid dd { margin: 0; font-size: 14px; }
+.run-card-pages { margin: 0; overflow-wrap: anywhere; }
+.runs-note { margin-top: 32px; }
+.runs-empty { padding: 32px; display: grid; gap: 16px; justify-items: start; }
+
+/* footer */
+.footer {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  max-width: 1020px; margin: 0 auto; padding: 32px 24px 48px;
+  border-top: 1px solid var(--border-default);
+}
+.footer .caption a { color: var(--text-secondary); }
+.theme-toggle { min-height: 44px; }
+
+@media (max-width: 720px) {
+  .slate-grid, .run-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .works-list { grid-template-columns: 1fr; }
+  .beat { grid-template-columns: 72px 1fr; }
+  .hero { padding: 56px 20px 48px; }
+}
