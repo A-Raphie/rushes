@@ -33,7 +33,11 @@ export default function Receipt({ params }) {
     <>
       <Nav />
       <main className="runs-main">
-        <p className="caption">
+        <p className="caption breadcrumb">
+          <Link href="/" className="runs-all">
+            Rushes
+          </Link>{" "}
+          /{" "}
           <Link href="/runs" className="runs-all">
             All runs
           </Link>{" "}

@@ -11,6 +11,12 @@ export default function Runs() {
     <>
       <Nav />
       <main className="runs-main">
+        <p className="caption breadcrumb">
+          <Link href="/" className="runs-all">
+            Rushes
+          </Link>{" "}
+          / Runs
+        </p>
         <h1 className="beats-h2">Today&apos;s rushes</h1>
         <p className="caption runs-intro">
           Every run Rushes has executed, with its tape. A card per run: the
