@@ -193,18 +193,18 @@ body {
 .nav-links a { color: var(--text-secondary); text-decoration: none; }
 .nav-links a:hover { color: var(--text-primary); text-decoration: underline; text-underline-offset: 4px; }
 
-.hero { max-width: var(--measure); margin: 0 auto; padding: 24px 24px 20px; text-align: center; }  /* fold: nav+hero <= ~310px so the tape is on screen with zero scroll */
-.hero-kicker { color: var(--text-secondary); margin: 0 0 8px; }
+.hero { max-width: var(--measure); margin: 0 auto; padding: 88px 24px 72px; text-align: center; }  /* reverted to Day 1 editorial scale per Raphie: the hero leads, the bench follows */
+.hero-kicker { color: var(--text-secondary); margin: 0 0 20px; }
 .hero-h1 {
   font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(2rem, 4.5vw, 3.1rem);
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
   text-wrap: balance;
-  margin: 0 0 10px;
+  margin: 0 0 24px;
 }
-.hero-sub { font-size: 15px; color: var(--text-secondary); max-width: 38em; margin: 0 auto 14px; text-wrap: pretty; }
+.hero-sub { font-size: 18px; color: var(--text-secondary); max-width: 34em; margin: 0 auto 36px; text-wrap: pretty; }
 .hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
 .film-stage {

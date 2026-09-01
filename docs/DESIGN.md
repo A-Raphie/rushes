@@ -73,3 +73,4 @@ Everything in the consensus line · purple in any shade · emoji · glassmorphis
 ## Folds used
 
 - landing: paper-hero-compressed into film-stage-in-fold. Sacrifice: only whitespace; no text cut. Reason: the brief promised the bench above the fold and v1 shipped a text-only fold; caught by Raphie Sep 1.
+- hero revert (Day 1.3): Day 1 editorial scale restored per Raphie (compressed hero read as ugly); the fold now leads with the poster, the bench starts at the fold line. Functional fixes from 1.1/1.2 kept: autoplay-once, stage-filling tape, clock-derived active frame.
