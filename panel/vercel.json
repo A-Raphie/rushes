@@ -1,3 +1,7 @@
 {
-  "cleanUrls": true
+  "functions": {
+    "app/api/run/route.js": {
+      "includeFiles": "node_modules/patchright-core/**"
+    }
+  }
 }

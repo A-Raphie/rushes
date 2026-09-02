@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "run": "tsx run.ts"
+    "run": "tsx run.ts",
+    "start": "node server.js"
   },
   "dependencies": {
     "@solarisdk/browser": "^0.1.2"

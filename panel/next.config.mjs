@@ -1,6 +1,5 @@
-/** Static export for Vercel (cleanUrls lives in vercel.json). */
+/** Hybrid: static pages + /api/point dispatcher; the engine runs on GitHub Actions. */
 const nextConfig = {
-  output: "export",
   images: { unoptimized: true },
 };
 

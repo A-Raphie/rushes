@@ -363,3 +363,34 @@ body {
 /* breadcrumbs: location always visible, way back always one click */
 .breadcrumb { margin: 0 0 18px; }
 .notfound-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* point: the task composer */
+.input {
+  width: 100%;
+  min-height: 44px;                     /* Fitts: touch target */
+  padding: 10px 12px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-input);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+.input:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
+.input::placeholder { color: var(--text-muted); }
+.point-form { padding: 20px; display: grid; gap: 16px; }
+.point-label { display: grid; gap: 6px; }
+.point-key { color: var(--text-muted); }
+.point-row { border: 1px solid var(--border-default); border-radius: var(--radius-card); padding: 14px; display: grid; gap: 10px; }
+.point-field { display: grid; gap: 6px; }
+.point-row .micro { color: var(--text-muted); }
+.point-remove { min-height: 36px; align-self: end; }
+.point-submit { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.point-error { color: var(--status-error); font-family: var(--font-mono); font-size: 14px; }
+
+/* skeletons shaped like the content */
+.skeleton-line { height: 14px; border-radius: var(--radius-input); background: var(--bg-subtle); margin: 10px 0; }
+.skeleton-line.w-40 { width: 40%; }
+.skeleton-line.w-60 { width: 60%; }
+.skeleton-line.w-80 { width: 80%; }
+.bench-loading { height: 560px; }

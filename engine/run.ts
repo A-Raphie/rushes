@@ -174,7 +174,7 @@ const manifest = {
     minutesBySurface: { browser: +(openMs / 60000).toFixed(1) },
   },
   tapeBytes,
-  tapeUrl: `/runs/${serial}/tape.ndjson`,
+  tapeUrl: `https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/${serial}/tape.ndjson`,
 };
 
 const runDir = join(ROOT, "runs", serial);

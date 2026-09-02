@@ -1,33 +1,54 @@
+"use client";
+
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Nav from "../../../components/Nav";
 import Bench from "../../../components/Bench";
 import ThemeToggle from "../../../components/ThemeToggle";
 import VerdictMark from "../../../components/VerdictMark";
-import { runs } from "../../../lib/runs";
+import { fetchManifest } from "../../../lib/live";
 
 /* The receipt: the manifest as a document, the bench playing that run's
-   tape. Static export generates one page per run at build time. */
-export function generateStaticParams() {
-  return runs.map((r) => ({ serial: r.serial }));
-}
+   tape. Data is fetched live from the run's committed manifest. */
+export default function Receipt() {
+  const { serial } = useParams();
+  const [run, setRun] = useState(null); // manifest shape
+  const [state, setState] = useState("loading"); // loading | missing | error | ready
 
-export function generateMetadata({ params }) {
-  return { title: `${params.serial} · Rushes` };
-}
-
-export default function Receipt({ params }) {
-  const run = runs.find((r) => r.serial === params.serial);
-  if (!run) notFound();
-
-  const fieldRows = [
-    ["Surface", run.surface],
-    ["Duration", `${run.durationSec}s`],
-    ["Tape", `${(run.tapeBytes / 1024).toFixed(0)} KB`],
-    ["Frames", `${run.pages.length} pages`],
-    ["Date", run.date],
-    ["Session", run.sessionId],
-  ];
+  useEffect(() => {
+    let alive = true;
+    fetchManifest(serial)
+      .then((m) => {
+        if (!alive) return;
+        if (!m) return setState("missing");
+        setRun({
+          serial: m.serial,
+          kind: m.task?.kind ?? "url-flow",
+          label: m.task?.name ?? m.serial,
+          surface: "cloud chrome · recorded",
+          pages: (m.steps ?? []).map((s) => s.url),
+          durationSec: Math.round(
+            ((new Date(m.steps?.at(-1)?.endedAt ?? m.createdAt) -
+              new Date(m.steps?.[0]?.startedAt ?? m.createdAt)) /
+              1000) *
+              10,
+          ) / 10 || m.cost?.minutesBySurface?.browser * 60 || 0,
+          tapeBytes: m.tapeBytes ?? 0,
+          sessionId: m.surface?.browser?.sessionId ?? "",
+          verdict: m.verdict?.outcome ?? "pending",
+          summary: m.verdict?.summary ?? "",
+          tapeUrl: m.tapeUrl,
+          date: (m.createdAt ?? "").slice(0, 10),
+          replayCaptured: Boolean(m.surface?.browser?.replayUrl),
+        });
+        setState("ready");
+      })
+      .catch(() => alive && setState("error"));
+    return () => {
+      alive = false;
+    };
+  }, [serial]);
 
   return (
     <>
@@ -41,44 +62,90 @@ export default function Receipt({ params }) {
           <Link href="/runs" className="runs-all">
             All runs
           </Link>{" "}
-          / {run.serial}
+          / {serial}
         </p>
-        <h1 className="beats-h2">{run.label}</h1>
 
-        <section aria-label="The cutting bench for this run">
-          <Bench run={run} />
-        </section>
+        {state === "loading" && (
+          <div className="card runs-empty" aria-hidden="true">
+            <div className="skeleton-line w-60" />
+            <div className="skeleton-line w-80" />
+          </div>
+        )}
 
-        <section className="card receipt" aria-label="Run manifest">
-          <h2 className="micro receipt-key">Manifest · {run.serial}</h2>
-          <dl className="receipt-grid">
-            {fieldRows.map(([k, v]) => (
-              <div key={k}>
-                <dt className="micro">{k}</dt>
-                <dd className="mono-num receipt-val">{v}</dd>
-              </div>
-            ))}
-          </dl>
-          <hr className="divider" />
-          <p className="receipt-verdict">
-            <VerdictMark verdict={run.verdict} tone="amber" />
-            <span className="receipt-summary">{run.summary}</span>
-          </p>
-          <hr className="divider" />
-          <p className="caption">
-            Pages visited:{" "}
-            {run.pages
-              .filter((p) => !p.startsWith("about:"))
-              .map((p) => p.replace(/^https?:\/\/(www\.)?/, ""))
-              .join(" · ")}
-          </p>
-        </section>
+        {state === "missing" && (
+          <div className="card runs-empty">
+            <p>No run with serial {serial} exists in the public registry.</p>
+            <Link className="btn btn-primary" href="/runs">
+              See all runs
+            </Link>
+          </div>
+        )}
 
-        <p className="caption runs-note">
-          The tape is rendered from the bytes downloaded at run time; the replay
-          original is notarized on Solari&apos;s servers. Presigned replay links
-          expire in 15 minutes and are re-fetched live via the Solari API.
-        </p>
+        {state === "error" && (
+          <div className="card runs-empty">
+            <p>The manifest did not load (GitHub unreachable or rate-limited).</p>
+            <button type="button" className="btn btn-primary" onClick={() => location.reload()}>
+              Try again
+            </button>
+          </div>
+        )}
+
+        {state === "ready" && run && (
+          <>
+            <h1 className="beats-h2">{run.label}</h1>
+            <section aria-label="The cutting bench for this run">
+              <Bench run={run} />
+            </section>
+            <section className="card receipt" aria-label="Run manifest">
+              <h2 className="micro receipt-key">Manifest · {run.serial}</h2>
+              <dl className="receipt-grid">
+                <div>
+                  <dt className="micro">Surface</dt>
+                  <dd className="receipt-val">{run.surface}</dd>
+                </div>
+                <div>
+                  <dt className="micro">Duration</dt>
+                  <dd className="receipt-val mono-num">{run.durationSec}s</dd>
+                </div>
+                <div>
+                  <dt className="micro">Tape</dt>
+                  <dd className="receipt-val mono-num">{(run.tapeBytes / 1024).toFixed(0)} KB</dd>
+                </div>
+                <div>
+                  <dt className="micro">Frames</dt>
+                  <dd className="receipt-val mono-num">{run.pages.length} pages</dd>
+                </div>
+                <div>
+                  <dt className="micro">Date</dt>
+                  <dd className="receipt-val mono-num">{run.date}</dd>
+                </div>
+                <div>
+                  <dt className="micro">Replay</dt>
+                  <dd className="receipt-val">{run.replayCaptured ? "captured" : "not resolved"}</dd>
+                </div>
+              </dl>
+              <hr className="divider" />
+              <p className="receipt-verdict">
+                <VerdictMark verdict={run.verdict} tone="amber" />
+                <span className="receipt-summary">{run.summary}</span>
+              </p>
+              <hr className="divider" />
+              <p className="caption">
+                Pages visited:{" "}
+                {run.pages
+                  .filter((p) => !p.startsWith("about:"))
+                  .map((p) => p.replace(/^https?:\/\/(www\.)?/, ""))
+                  .join(" · ")}
+              </p>
+            </section>
+            <p className="caption runs-note">
+              The tape is rendered from the bytes committed at run time; the
+              replay original is notarized on Solari&apos;s servers. Presigned
+              replay links expire in 15 minutes and are re-fetched live via the
+              Solari API.
+            </p>
+          </>
+        )}
       </main>
       <footer className="footer">
         <span className="caption">
