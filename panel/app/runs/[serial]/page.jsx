@@ -41,6 +41,7 @@ export default function Receipt() {
               verdict: { outcome: entry.verdict, summary: entry.summary },
               tapeBytes: entry.tapeBytes,
               tapeUrl: entry.tapeUrl,
+              durationSec: entry.durationSec,
               surface: { browser: { sessionId: entry.sessionId } },
               reconstructed: true,
             };
@@ -150,7 +151,7 @@ export default function Receipt() {
                   <dd className="receipt-val mono-num">{(run.tapeBytes / 1024).toFixed(0)} KB</dd>
                 </div>
                 <div>
-                  <dt className="micro">Frames</dt>
+                  <dt className="micro">Pages visited</dt>
                   <dd className="receipt-val mono-num">{run.pages.length} pages</dd>
                 </div>
                 <div>

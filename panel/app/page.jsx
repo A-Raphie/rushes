@@ -93,11 +93,41 @@ export default function Landing() {
           </ul>
         </section>
 
+        <section className="compare" aria-label="Screen recording versus the Rushes tape">
+          <h2 className="beats-h2">Screen recording vs the tape</h2>
+          <div className="compare-grid">
+            <div className="card compare-col">
+              <span className="micro compare-key">Screen recording</span>
+              <ul>
+                <li>Recorded on your machine</li>
+                <li>Editable: yours to cut</li>
+                <li>Hosted on your disk or drive</li>
+                <li>Trust it? Your claim</li>
+              </ul>
+            </div>
+            <div className="card compare-col compare-col-tape">
+              <span className="micro compare-key">The Rushes tape</span>
+              <ul>
+                <li>Recorded by Solari&apos;s cloud browser</li>
+                <li>Committed unedited, byte for byte</li>
+                <li>Hosted on Solari&apos;s servers · this repo</li>
+                <li>Serial + manifest + replay, notarized</li>
+              </ul>
+            </div>
+          </div>
+          <p className="caption compare-note">
+            If the clip and the replay ever disagree, believe the replay: the
+            original is notarized on Solari&apos;s servers.
+          </p>
+        </section>
+
         <RunsTeaser />
       </main>
       <footer className="footer">
         <span className="caption">
-          Built on <a href="https://getsolari.com">Solari</a> · forked from the{" "}
+          Built on <a href="https://getsolari.com">Solari</a>, Pinetree
+          Research&apos;s agent infrastructure (cloud browsers, sandboxes,
+          desktops) · forked from the{" "}
           <a href="https://github.com/solari-sdk/solari-cookbook">solari-cookbook</a>
         </span>
         <ThemeToggle />

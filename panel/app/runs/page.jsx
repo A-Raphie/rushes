@@ -94,7 +94,7 @@ export default function Runs() {
                       <dd className="mono-num">{(r.tapeBytes / 1024).toFixed(0)} KB</dd>
                     </div>
                     <div>
-                      <dt className="micro">Frames</dt>
+                      <dt className="micro">Pages</dt>
                       <dd className="mono-num">{r.pages.length} pages</dd>
                     </div>
                   </dl>

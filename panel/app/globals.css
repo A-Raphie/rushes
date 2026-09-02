@@ -510,3 +510,15 @@ body {
   cursor: pointer;
 }
 .point-addaction:hover { color: var(--text-primary); }
+
+/* compare: the wall between a claim and the evidence */
+.compare { max-width: 1020px; margin: 0 auto; padding: 56px 24px; }
+.compare-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.compare-col { padding: 16px 18px; }
+.compare-col .compare-key { color: var(--text-muted); display: block; margin-bottom: 10px; }
+.compare-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.compare-col li { font-size: 14px; color: var(--text-secondary); }
+.compare-col-tape { border-color: var(--border-strong); }
+.compare-col-tape li { color: var(--text-primary); }
+.compare-note { margin: 14px 0 0; max-width: 760px; }
+@media (max-width: 720px) { .compare-grid { grid-template-columns: 1fr; } }

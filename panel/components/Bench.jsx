@@ -222,6 +222,7 @@ export default function Bench({ run }) {
               not ready within the capture window. Re-run the task to record a
               fresh tape.
             </p>
+            {run.summary && <p className="bench-notape-summary caption">{run.summary}</p>}
           </div>
         ) : (
           <>
