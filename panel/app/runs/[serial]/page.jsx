@@ -24,45 +24,64 @@ export default function Receipt() {
       try {
         m = await fetchManifest(serial);
       } catch {
+        // manifest missing from the repo, or GitHub rate-limited: fall back
+        // to the registry copy of this run (same facts, less detail)
         try {
-          // rate limit: fall back to the registry copy of this run
           const registry = await getRegistry();
           const entry = registry.find((r) => r.serial === serial);
           if (entry) {
-            m = { serial: entry.serial, task: { name: entry.label }, createdAt: entry.date, steps: entry.pages.map((u, i) => ({ url: u })), verdict: { outcome: entry.verdict, summary: entry.summary }, tapeBytes: entry.tapeBytes, tapeUrl: entry.tapeUrl, surface: { browser: { sessionId: entry.sessionId } }, reconstructed: true };
+            m = {
+              serial: entry.serial,
+              task: { name: entry.label },
+              createdAt: entry.date,
+              steps: entry.pages.map((u) => ({ url: u })),
+              verdict: { outcome: entry.verdict, summary: entry.summary },
+              tapeBytes: entry.tapeBytes,
+              tapeUrl: entry.tapeUrl,
+              surface: { browser: { sessionId: entry.sessionId } },
+              reconstructed: true,
+            };
             fromRegistry = true;
-          } else return setState("missing");
+          } else {
+            if (alive) setState("missing");
+            return;
+          }
         } catch {
-          return setState("error");
+          if (alive) setState("error");
+          return;
         }
       }
-      {
-        if (!alive) return;
-        if (!m) return setState("missing");
-        if (fromRegistry) m.reconstructed = true;
-        setRun({
-          serial: m.serial,
-          kind: m.task?.kind ?? "url-flow",
-          label: m.task?.name ?? m.serial,
-          surface: "cloud chrome · recorded",
-          pages: (m.steps ?? []).map((s) => s.url),
-          durationSec: Math.round(
+      if (!alive) return;
+      if (!m) {
+        setState("missing");
+        return;
+      }
+      if (fromRegistry) m.reconstructed = true;
+      setRun({
+        serial: m.serial,
+        kind: m.task?.kind ?? "url-flow",
+        label: m.task?.name ?? m.serial,
+        surface: "cloud chrome · recorded",
+        pages: (m.steps ?? []).map((s) => s.url),
+        durationSec:
+          Math.round(
             ((new Date(m.steps?.at(-1)?.endedAt ?? m.createdAt) -
               new Date(m.steps?.[0]?.startedAt ?? m.createdAt)) /
               1000) *
               10,
-          ) / 10 || m.cost?.minutesBySurface?.browser * 60 || 0,
-          tapeBytes: m.tapeBytes ?? 0,
-          sessionId: m.surface?.browser?.sessionId ?? "",
-          verdict: m.verdict?.outcome ?? "pending",
-          summary: m.verdict?.summary ?? "",
-          tapeUrl: m.tapeUrl,
-          date: (m.createdAt ?? "").slice(0, 10),
-          replayCaptured: Boolean(m.surface?.browser?.replayUrl),
-        });
-        setState("ready");
-      })
-      .catch(() => alive && setState("error"));
+          ) / 10 ||
+          m.cost?.minutesBySurface?.browser * 60 ||
+          0,
+        tapeBytes: m.tapeBytes ?? 0,
+        sessionId: m.surface?.browser?.sessionId ?? "",
+        verdict: m.verdict?.outcome ?? "pending",
+        summary: m.verdict?.summary ?? "",
+        tapeUrl: m.tapeUrl,
+        date: (m.createdAt ?? "").slice(0, 10),
+        replayCaptured: Boolean(m.surface?.browser?.replayUrl),
+      });
+      setState("ready");
+    })();
     return () => {
       alive = false;
     };
