@@ -1,5 +1,22 @@
 [
   {
+    "serial": "RUSH-2026-09-02-0008",
+    "kind": "url-flow",
+    "label": "Docs click-through: navigation leads to the docs (retry)",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://docs.getsolari.com/"
+    ],
+    "durationSec": 13.8,
+    "tapeBytes": 0,
+    "sessionId": "ip-10-0-10-96:a378fbe2-5841-41cd-8a65-ab37227ba7cd:cmtioo7ko021zo101irjk89q7:1788355332584.YQDVHC7fQO06urwA_2xqMw",
+    "verdict": "failed",
+    "summary": "The navigation failed to reach the docs page. The step did not show the expected title “Solari Docs”.",
+    "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0008/tape.ndjson",
+    "date": "2026-09-02",
+    "replayCaptured": false
+  },
+  {
     "serial": "RUSH-2026-09-02-0007",
     "kind": "url-flow",
     "label": "Docs click-through: navigation leads to the docs",
