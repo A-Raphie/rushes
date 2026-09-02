@@ -114,6 +114,11 @@ export default function Point() {
     <>
       <Nav />
       <main className="runs-main">
+        <p className="caption breadcrumb">
+          <Link href="/" className="runs-all">
+            ← Rushes
+          </Link>
+        </p>
         <h1 className="beats-h2">Point it at a task</h1>
         {outage && (
           <div className="card point-notice" role="status">
