@@ -375,9 +375,10 @@ body {
   color: var(--text-primary);
   font-family: var(--font-mono);
   font-size: 14px;
+  font-weight: 500;                     /* values read as committed text */
 }
 .input:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
-.input::placeholder { color: var(--text-muted); }
+.input::placeholder { color: var(--text-muted); font-weight: 400; }
 .point-form { padding: 20px; display: grid; gap: 16px; }
 .point-label { display: grid; gap: 6px; }
 .point-key { color: var(--text-muted); }
@@ -446,5 +447,6 @@ body {
 [data-theme="projection"] .verdict-mark.is-notape .verdict-text { color: var(--text-on-film); }
 
 /* point: honest outage notice while Solari's replay generation is down */
-.point-notice { padding: 14px 18px; display: grid; gap: 6px; border-left: 3px solid var(--accent); }
+.point-notice { padding: 14px 18px; display: grid; gap: 6px; border-left: 3px solid var(--accent); margin-bottom: 20px; }
+.point-notice + .runs-intro { margin-top: 0; }
 .point-notice-key { color: var(--text-muted); }

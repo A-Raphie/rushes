@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Nav from "../../components/Nav";
 import ThemeToggle from "../../components/ThemeToggle";
+import { getRegistry } from "../../lib/live";
 
 /* Point it at a task: the composer. Submitting runs the recorded engine
    server-side and lands you on the fresh run's receipt. */
@@ -14,6 +15,23 @@ export default function Point() {
   const [rows, setRows] = useState([{ url: "", expect: "" }]);
   const [state, setState] = useState("idle"); // idle | running | error
   const [message, setMessage] = useState("");
+  const [outage, setOutage] = useState(false); // Solari replay generation down
+
+  // The outage notice is SELF-CLEARING: it renders only while the newest
+  // run in the public registry has no captured tape. The first run that
+  // captures one proves Solari recovered and the notice disappears.
+  useEffect(() => {
+    let alive = true;
+    getRegistry()
+      .then((registry) => {
+        if (!alive || !registry?.length) return;
+        setOutage(registry[0].replayCaptured === false);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   // Poll the live registry until a serial we have not seen appears: the
   // workflow commits the receipt, and the new serial IS the confirmation.
@@ -103,14 +121,16 @@ export default function Point() {
           / Point it at a task
         </p>
         <h1 className="beats-h2">Point it at a task</h1>
-        <div className="card point-notice" role="status">
-          <span className="micro point-notice-key">Heads up</span>
-          <p className="caption">
-            Solari&apos;s replay generation is down right now (Sep 2, reported to
-            them). New runs still execute every check and commit their manifest
-            and verdict, but the tape may read no tape until they recover.
-          </p>
-        </div>
+        {outage && (
+          <div className="card point-notice" role="status">
+            <span className="micro point-notice-key">Heads up · since Sep 2</span>
+            <p className="caption">
+              Solari&apos;s replay generation is down (reported Sep 2). Runs still
+              execute every check and commit their verdict; tapes may read no
+              tape until recovery. Clears itself when a tape is captured.
+            </p>
+          </div>
+        )}
         <p className="caption runs-intro">
           Up to five pages. For each one: the address, and a word or phrase
           that should be on the page. The recorded cloud browser visits every

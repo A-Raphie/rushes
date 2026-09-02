@@ -214,6 +214,7 @@ export default function Bench({ run }) {
           </div>
         )}
         {run.tapeBytes === 0 || run.replayCaptured === false ? (
+          // no tape exists: the designed frame replaces the player entirely
           <div className="bench-notape" role="status">
             <span className="micro bench-notape-mark">No tape</span>
             <p>
@@ -223,31 +224,33 @@ export default function Bench({ run }) {
             </p>
           </div>
         ) : (
-          status === "error" && (
-            <p className="bench-error">
-              The tape did not load. It lives at <code>{run.tapeUrl}</code>:
-              reload, or read{" "}
-              <a href="https://github.com/A-Raphie/rushes/tree/main/docs">the run docs</a>.
-            </p>
-          )
-        )}
-        <div ref={mountRef} className="bench-mount" />
+          <>
+            {status === "error" && (
+              <p className="bench-error">
+                The tape did not load. It lives at <code>{run.tapeUrl}</code>:
+                reload, or read{" "}
+                <a href="https://github.com/A-Raphie/rushes/tree/main/docs">the run docs</a>.
+              </p>
+            )}
+            <div ref={mountRef} className="bench-mount" />
 
-        <figcaption className="bench-strip">
-          <span className="micro bench-strip-label">Frames · {frames.length}</span>
-          {frames.map((f, i) => (
-            <button
-              key={i}
-              type="button"
-              className={`frame-cell${i === active ? " is-active" : ""}`}
-              onClick={() => seek(i)}
-              aria-label={`Frame ${i + 1}: ${hostOf(f.href)} at ${tc(f.t)}`}
-            >
-              <span className="mono-num frame-tc">{tc(f.t)}</span>
-              <span className="frame-host">{hostOf(f.href) || "blank"}</span>
-            </button>
-          ))}
-        </figcaption>
+            <figcaption className="bench-strip">
+              <span className="micro bench-strip-label">Frames · {frames.length}</span>
+              {frames.map((f, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  className={`frame-cell${i === active ? " is-active" : ""}`}
+                  onClick={() => seek(i)}
+                  aria-label={`Frame ${i + 1}: ${hostOf(f.href)} at ${tc(f.t)}`}
+                >
+                  <span className="mono-num frame-tc">{tc(f.t)}</span>
+                  <span className="frame-host">{hostOf(f.href) || "blank"}</span>
+                </button>
+              ))}
+            </figcaption>
+          </>
+        )}
 
         <p className="bench-note caption">
           Recorded by the Solari cloud browser. The replay is notarized on
