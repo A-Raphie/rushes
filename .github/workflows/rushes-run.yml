@@ -38,3 +38,11 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx tsx run.ts specs/web-run.json
+
+      - name: Commit the receipt
+        run: |
+          git config user.name "rushes-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add panel/data/runs.json panel/public/runs
+          git commit -m "run receipt: ${{ github.event.client_payload.spec.name }}" || echo "nothing to commit"
+          git push
