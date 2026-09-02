@@ -1,0 +1,56 @@
+{
+  "serial": "RUSH-2026-09-02-0003",
+  "createdAt": "2026-09-02T09:02:00.650Z",
+  "task": {
+    "kind": "url-flow",
+    "name": "Morning check: Pinetree and Solari are up (rerun)",
+    "specFile": "specs/web-run.json"
+  },
+  "surface": {
+    "browser": {
+      "sessionId": "ip-10-0-10-128:f94cda4f-57bb-4835-a50e-6b85504bd7db:cmtioo7ko021zo101irjk89q7:1788339720982.ta-2jzOnQ0jujVorRwFGfw",
+      "recorded": true,
+      "replayUrl": null,
+      "replayExpiresInSeconds": null,
+      "region": "us-west"
+    },
+    "sandbox": null,
+    "desktop": null
+  },
+  "steps": [
+    {
+      "n": 1,
+      "label": "pinetree research",
+      "url": "https://pinetree-research.com/",
+      "title": "Pinetree Research",
+      "startedAt": "2026-09-02T09:02:01.236Z",
+      "endedAt": "2026-09-02T09:02:03.800Z",
+      "ok": true,
+      "expect": "Pinetree"
+    },
+    {
+      "n": 2,
+      "label": "solari pricing",
+      "url": "https://www.getsolari.com/pricing",
+      "title": "Solari",
+      "startedAt": "2026-09-02T09:02:03.800Z",
+      "endedAt": "2026-09-02T09:02:06.482Z",
+      "ok": true,
+      "expect": "Pricing"
+    }
+  ],
+  "verdict": {
+    "outcome": "failed",
+    "summary": "Pinetree research passed (ok true). Solari pricing passed (ok true).",
+    "model": "openai/gpt-oss-120b"
+  },
+  "clip": null,
+  "cost": {
+    "solariCredits": 0.0002,
+    "minutesBySurface": {
+      "browser": 0.1
+    }
+  },
+  "tapeBytes": 0,
+  "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0003/tape.ndjson"
+}
