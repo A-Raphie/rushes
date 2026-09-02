@@ -1,5 +1,22 @@
 [
   {
+    "serial": "RUSH-2026-09-02-0005",
+    "kind": "url-flow",
+    "label": "E2E rehearsal check",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://example.com/"
+    ],
+    "durationSec": 3.2,
+    "tapeBytes": 0,
+    "sessionId": "ip-10-0-10-96:704c6035-c94a-4a2e-8ad6-334f34ab2d87:cmtioo7ko021zo101irjk89q7:1788350144506.2iavLtulF5tNicrUedUxOg",
+    "verdict": "failed",
+    "summary": "Step 1 passed by showing the title “Example Domain”. Replay was not captured.",
+    "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0005/tape.ndjson",
+    "date": "2026-09-02",
+    "replayCaptured": false
+  },
+  {
     "serial": "RUSH-2026-09-02-0004",
     "kind": "url-flow",
     "label": "Unnamed task",

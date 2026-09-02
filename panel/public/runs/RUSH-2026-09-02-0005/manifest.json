@@ -1,0 +1,46 @@
+{
+  "serial": "RUSH-2026-09-02-0005",
+  "createdAt": "2026-09-02T11:55:43.994Z",
+  "task": {
+    "kind": "url-flow",
+    "name": "E2E rehearsal check",
+    "specFile": "specs/web-run.json"
+  },
+  "surface": {
+    "browser": {
+      "sessionId": "ip-10-0-10-96:704c6035-c94a-4a2e-8ad6-334f34ab2d87:cmtioo7ko021zo101irjk89q7:1788350144506.2iavLtulF5tNicrUedUxOg",
+      "recorded": true,
+      "replayUrl": null,
+      "replayExpiresInSeconds": null,
+      "region": "us-west"
+    },
+    "sandbox": null,
+    "desktop": null
+  },
+  "steps": [
+    {
+      "n": 1,
+      "label": "step 1",
+      "url": "https://example.com/",
+      "title": "Example Domain",
+      "startedAt": "2026-09-02T11:55:44.900Z",
+      "endedAt": "2026-09-02T11:55:47.142Z",
+      "ok": true,
+      "expect": "Example Domain"
+    }
+  ],
+  "verdict": {
+    "outcome": "failed",
+    "summary": "Step 1 passed by showing the title “Example Domain”. Replay was not captured.",
+    "model": "openai/gpt-oss-120b"
+  },
+  "clip": null,
+  "cost": {
+    "solariCredits": 0.0001,
+    "minutesBySurface": {
+      "browser": 0.1
+    }
+  },
+  "tapeBytes": 0,
+  "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0005/tape.ndjson"
+}
