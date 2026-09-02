@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Nav from "../../components/Nav";
 import ThemeToggle from "../../components/ThemeToggle";
-import { getRegistry } from "../../lib/live";
+import OutageNotice from "../../components/OutageNotice";
 
 /* Point it at a task: the composer. Submitting runs the recorded engine
    server-side and lands you on the fresh run's receipt. */
@@ -15,24 +15,6 @@ export default function Point() {
   const [rows, setRows] = useState([{ url: "", expect: "", actions: [] }]);
   const [state, setState] = useState("idle"); // idle | running | error
   const [message, setMessage] = useState("");
-  const [outage, setOutage] = useState(false); // Solari replay generation down
-
-  // The outage notice is SELF-CLEARING: it renders only while the newest
-  // run in the public registry has no captured tape. The first run that
-  // captures one proves Solari recovered and the notice disappears.
-  useEffect(() => {
-    let alive = true;
-    getRegistry()
-      .then((registry) => {
-        if (!alive || !registry?.length) return;
-        setOutage(registry[0].replayCaptured === false);
-      })
-      .catch(() => {});
-    return () => {
-      alive = false;
-    };
-  }, []);
-
   // Poll the live registry until a serial we have not seen appears: the
   // workflow commits the receipt, and the new serial IS the confirmation.
   async function waitForNewSerial(beforeSerials, tries = 40) {
@@ -146,16 +128,7 @@ export default function Point() {
           </Link>
         </p>
         <h1 className="beats-h2">Point it at a task</h1>
-        {outage && (
-          <div className="card point-notice" role="status">
-            <span className="micro point-notice-key">Heads up · since Sep 2</span>
-            <p className="caption">
-              Solari&apos;s replay generation is down (reported Sep 2). Runs still
-              execute every check and commit their verdict; tapes may read no
-              tape until recovery. Clears itself when a tape is captured.
-            </p>
-          </div>
-        )}
+        <OutageNotice />
         <p className="caption runs-intro">
           The first task type is a web flow: up to five pages, and the words
           that should be on them. The recorded cloud browser walks the flow,

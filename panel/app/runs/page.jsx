@@ -6,6 +6,7 @@ import Nav from "../../components/Nav";
 import ThemeToggle from "../../components/ThemeToggle";
 import VerdictMark from "../../components/VerdictMark";
 import { getRegistry } from "../../lib/live";
+import OutageNotice from "../../components/OutageNotice";
 
 export default function Runs() {
   const [runs, setRuns] = useState(null);
@@ -32,6 +33,7 @@ export default function Runs() {
           / Runs
         </p>
         <h1 className="beats-h2">Today&apos;s rushes</h1>
+        <OutageNotice />
         <p className="caption runs-intro">
           Every run Rushes has executed, with its tape. A card per run: the
           serial, the surface, the verdict.
@@ -75,11 +77,12 @@ export default function Runs() {
                     <span className="serial-stamp mono-num">{r.serial}</span>
                     <VerdictMark verdict={r.verdict} tapeBytes={r.tapeBytes} />
                   </div>
-                  <p className="run-card-label">
-                    {r.verdict === "failed" && r.tapeBytes === 0
-                      ? "No tape was captured: the replay was not ready in time. Re-run this task."
-                      : r.summary ?? r.label}
-                  </p>
+                  <p className="run-card-label">{r.label}</p>
+                  {r.verdict !== "verified" && (
+                    <p className="caption run-card-reason">
+                      No tape was captured: the replay was not ready in time.
+                    </p>
+                  )}
                   <dl className="run-card-grid">
                     <div>
                       <dt className="micro">Surface</dt>

@@ -303,6 +303,7 @@ body {
 /* runs teaser + rows */
 .runs-teaser-head { display: flex; justify-content: space-between; align-items: baseline; }
 .runs-all { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border-strong); padding-bottom: 2px; }
+.run-card { display: block; }  /* inline anchor boxes fragment and overlap siblings */
 .run-row {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
   padding: 16px 18px; margin-top: 16px;
@@ -522,3 +523,5 @@ body {
 .compare-col-tape li { color: var(--text-primary); }
 .compare-note { margin: 14px 0 0; max-width: 760px; }
 @media (max-width: 720px) { .compare-grid { grid-template-columns: 1fr; } }
+
+.run-card-reason { margin: 0 0 14px; }
