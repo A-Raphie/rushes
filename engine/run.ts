@@ -79,16 +79,35 @@ try {
 const openMs = Date.now() - t0;
 console.log("open ms:", openMs);
 
-// ---- replay: presigned URL exists only ~1-3s after release ----
+// ---- replay: presigned URL exists only after the session is released ----
+// Two-stage poll: first wait for the session to actually reach released
+// (the RUSH-2026-09-02-0002 failure was a blind ~14s window giving up on a
+// busy free-tier session), then poll the replay URL for up to ~60s.
+let released = false;
+for (let i = 1; i <= 15; i++) {
+  try {
+    const anySolari = solari as any;
+    const state = await anySolari.sessions.client.get(`/sessions/${encodeURIComponent(sessionId)}`);
+    const status = state?.data?.status ?? state?.status;
+    if (status === "released" || status === "deleted") {
+      released = true;
+      console.log(`session released (attempt ${i})`);
+      break;
+    }
+  } catch {
+    /* state check is best-effort; the replay poll below still runs */
+  }
+  await sleep(2000);
+}
 let replay = null;
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i <= 20; i++) {
   try {
     replay = await solari.sessions.getReplayUrl(sessionId);
     console.log(`replay resolved on attempt ${i}`);
     break;
   } catch (e) {
     console.log(`replay attempt ${i} missed`);
-    await sleep(1500);
+    await sleep(3000);
   }
 }
 

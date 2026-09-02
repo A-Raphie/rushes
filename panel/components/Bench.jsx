@@ -203,8 +203,15 @@ export default function Bench({ run }) {
         )}
         {status === "error" && (
           <p className="bench-error">
-            The tape did not load. It lives at <code>{run.tapeUrl}</code>: reload, or read{" "}
-            <a href="https://github.com/A-Raphie/rushes/tree/main/docs">the run docs</a>.
+            {run.replayCaptured === false
+              ? "No tape was captured: the replay was not ready within the capture window, so the verdict is failed. Re-run the task."
+              : "The tape did not load. It lives at "}
+            {!run.replayCaptured === false && (
+              <>
+                <code>{run.tapeUrl}</code>: reload, or read{" "}
+                <a href="https://github.com/A-Raphie/rushes/tree/main/docs">the run docs</a>.
+              </>
+            )}
           </p>
         )}
         <div ref={mountRef} className="bench-mount" />
