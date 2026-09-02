@@ -25,9 +25,10 @@ export default function Landing() {
             Here is the tape.
           </h1>
           <p className="hero-sub">
-            Rushes runs your task on Solari and hands back the receipt: the
-            clip, the manifest, a verdict, and a replay hosted on Solari&apos;s
-            own servers. Not your screen recording. Not your claim.
+            Whatever your agent does on a computer, Rushes runs it on Solari
+            and hands back the receipt: the clip, the manifest, a verdict, and
+            a replay hosted on Solari&apos;s own servers. Not your screen
+            recording. Not your claim.
           </p>
           <div className="hero-ctas">
             <a className="btn btn-primary btn-lg" href="/point">

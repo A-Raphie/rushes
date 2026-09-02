@@ -2,10 +2,12 @@
 
 Every agent run owes the world a demo. Rushes pays up.
 
-You point it at a task. The task executes on Solari (cloud browser, sandbox, or
-desktop). You get the tape back: an auto-cut clip, a serial-numbered manifest,
-and a replay hosted on Solari's own servers. Not your screen recording. Not
-your claim.
+You point it at a task. The task executes on Solari and you get the tape
+back: an auto-cut clip, a serial-numbered manifest, and a replay hosted on
+Solari's own servers. Not your screen recording. Not your claim.
+
+Task types today: web flows (live). Next in the engine: sandbox tasks
+(clone, run, verify output) and desktop capture.
 
 Live panel: https://tryrushes.vercel.app
 

@@ -157,9 +157,10 @@ export default function Point() {
           </div>
         )}
         <p className="caption runs-intro">
-          Up to five pages. For each one: the address, and a word or phrase
-          that should be on the page. The recorded cloud browser visits every
-          page, and the receipt commits itself to the public registry.
+          The first task type is a web flow: up to five pages, and the words
+          that should be on them. The recorded cloud browser walks the flow,
+          and the receipt commits itself to the public registry. Sandbox and
+          desktop tasks ship next.
         </p>
 
         <form className="card point-form" onSubmit={submit}>
