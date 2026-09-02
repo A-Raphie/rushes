@@ -1,0 +1,46 @@
+{
+  "serial": "RUSH-2026-09-02-0006",
+  "createdAt": "2026-09-02T12:46:12.300Z",
+  "task": {
+    "kind": "url-flow",
+    "name": "Outage probe: Node.js and GitHub are up",
+    "specFile": "specs/web-run.json"
+  },
+  "surface": {
+    "browser": {
+      "sessionId": "ip-10-0-11-50:23bb2225-3da4-4ffa-acf9-7cf0353d5eef:cmtioo7ko021zo101irjk89q7:1788353172920.0GPLzOnb-DwzrfGM2z6uGQ",
+      "recorded": true,
+      "replayUrl": null,
+      "replayExpiresInSeconds": null,
+      "region": "us-west"
+    },
+    "sandbox": null,
+    "desktop": null
+  },
+  "steps": [
+    {
+      "n": 1,
+      "label": "step 1",
+      "url": "https://nodejs.org/en",
+      "title": "Node.js — Run JavaScript Everywhere",
+      "startedAt": "2026-09-02T12:46:13.413Z",
+      "endedAt": "2026-09-02T12:46:15.963Z",
+      "ok": true,
+      "expect": "Node.js"
+    }
+  ],
+  "verdict": {
+    "outcome": "failed",
+    "summary": "Node.js passed, title “Node.js — Run JavaScript Everywhere” was observed. GitHub did not show the expected phrase.",
+    "model": "openai/gpt-oss-120b"
+  },
+  "clip": null,
+  "cost": {
+    "solariCredits": 0.0002,
+    "minutesBySurface": {
+      "browser": 0.1
+    }
+  },
+  "tapeBytes": 0,
+  "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0006/tape.ndjson"
+}

@@ -1,5 +1,22 @@
 [
   {
+    "serial": "RUSH-2026-09-02-0006",
+    "kind": "url-flow",
+    "label": "Outage probe: Node.js and GitHub are up",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://nodejs.org/en"
+    ],
+    "durationSec": 3.7,
+    "tapeBytes": 0,
+    "sessionId": "ip-10-0-11-50:23bb2225-3da4-4ffa-acf9-7cf0353d5eef:cmtioo7ko021zo101irjk89q7:1788353172920.0GPLzOnb-DwzrfGM2z6uGQ",
+    "verdict": "failed",
+    "summary": "Node.js passed, title “Node.js — Run JavaScript Everywhere” was observed. GitHub did not show the expected phrase.",
+    "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0006/tape.ndjson",
+    "date": "2026-09-02",
+    "replayCaptured": false
+  },
+  {
     "serial": "RUSH-2026-09-02-0005",
     "kind": "url-flow",
     "label": "E2E rehearsal check",
