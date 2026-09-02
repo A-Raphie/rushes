@@ -89,8 +89,11 @@ try {
     let ok = true;
     if (step.expect) {
       ok = false;
+      const needle = step.expect.toLowerCase();
       for (let t = 0; t < 8; t++) {
-        if ((await page.getByText(step.expect).count()) > 0) {
+        const inBody = (await page.getByText(step.expect).count()) > 0;
+        const inTitle = (await page.title()).toLowerCase().includes(needle);
+        if (inBody || inTitle) {
           ok = true;
           break;
         }
