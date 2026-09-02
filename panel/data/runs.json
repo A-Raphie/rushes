@@ -1,5 +1,22 @@
 [
   {
+    "serial": "RUSH-2026-09-02-0010",
+    "kind": "url-flow",
+    "label": "Replay recovery probe",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://www.getsolari.com/"
+    ],
+    "durationSec": 4.2,
+    "tapeBytes": 0,
+    "sessionId": "ip-10-0-10-24:8251b808-909e-43bb-9605-1d5b6d9b4c76:cmtioo7ko021zo101irjk89q7:1788381101434.37C4-CFXMsfy_PfD8BJ9Aw",
+    "verdict": "failed",
+    "summary": "The step succeeded, showing the page title Solari. Replay capture did not occur, with zero bytes recorded.",
+    "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0010/tape.ndjson",
+    "date": "2026-09-02",
+    "replayCaptured": false
+  },
+  {
     "serial": "RUSH-2026-09-02-0009",
     "kind": "url-flow",
     "label": "Docs click-through: navigation leads to the docs (title match)",

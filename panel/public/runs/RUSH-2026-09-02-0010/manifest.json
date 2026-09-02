@@ -1,0 +1,47 @@
+{
+  "serial": "RUSH-2026-09-02-0010",
+  "createdAt": "2026-09-02T20:31:40.809Z",
+  "task": {
+    "kind": "url-flow",
+    "name": "Replay recovery probe",
+    "specFile": "specs/web-run.json"
+  },
+  "surface": {
+    "browser": {
+      "sessionId": "ip-10-0-10-24:8251b808-909e-43bb-9605-1d5b6d9b4c76:cmtioo7ko021zo101irjk89q7:1788381101434.37C4-CFXMsfy_PfD8BJ9Aw",
+      "recorded": true,
+      "replayUrl": null,
+      "replayExpiresInSeconds": null,
+      "region": "us-west"
+    },
+    "sandbox": null,
+    "desktop": null
+  },
+  "steps": [
+    {
+      "n": 1,
+      "label": "solari home",
+      "url": "https://www.getsolari.com/",
+      "title": "Solari",
+      "startedAt": "2026-09-02T20:31:42.009Z",
+      "endedAt": "2026-09-02T20:31:44.950Z",
+      "ok": true,
+      "expect": "Solari",
+      "actions": []
+    }
+  ],
+  "verdict": {
+    "outcome": "failed",
+    "summary": "The step succeeded, showing the page title Solari. Replay capture did not occur, with zero bytes recorded.",
+    "model": "openai/gpt-oss-120b"
+  },
+  "clip": null,
+  "cost": {
+    "solariCredits": 0.0002,
+    "minutesBySurface": {
+      "browser": 0.1
+    }
+  },
+  "tapeBytes": 0,
+  "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0010/tape.ndjson"
+}
