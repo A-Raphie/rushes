@@ -84,9 +84,18 @@ try {
     }
 
     const title = await page.title();
+    // expected text is WAITED for, not snapshot-checked: post-action pages
+    // (especially SPAs) render their text over the following seconds.
     let ok = true;
     if (step.expect) {
-      ok = (await page.getByText(step.expect).count()) > 0;
+      ok = false;
+      for (let t = 0; t < 8; t++) {
+        if ((await page.getByText(step.expect).count()) > 0) {
+          ok = true;
+          break;
+        }
+        await page.waitForTimeout(1000);
+      }
     }
     const actionsOk = actionLog.every((a) => a.ok);
     steps.push({
