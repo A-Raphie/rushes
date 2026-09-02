@@ -444,3 +444,7 @@ body {
 .verdict-mark.is-notape { color: var(--status-pending); }
 .verdict-mark.is-notape .verdict-text { color: var(--text-primary); }
 [data-theme="projection"] .verdict-mark.is-notape .verdict-text { color: var(--text-on-film); }
+
+/* point: honest outage notice while Solari's replay generation is down */
+.point-notice { padding: 14px 18px; display: grid; gap: 6px; border-left: 3px solid var(--accent); }
+.point-notice-key { color: var(--text-muted); }

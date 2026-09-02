@@ -38,10 +38,20 @@ export default function Bench({ run }) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
+    if (!run.tapeBytes) return; // no tape exists: the designed frame below is the truth, skip the fetch
     let alive = true;
     (async () => {
       try {
-        const res = await fetch(run.tapeUrl);
+        // Fresh runs race the raw-CDN cache: the registry can know a run
+        // before every edge serves its tape, so retry the fetch a few times
+        // before declaring the tape missing.
+        let res = null;
+        for (let attempt = 1; attempt <= 4; attempt++) {
+          res = await fetch(run.tapeUrl);
+          if (res.ok) break;
+          if (alive && attempt < 4) await new Promise((r) => setTimeout(r, 4000));
+        }
+        if (!res || !res.ok) throw new Error(`tape ${res ? res.status : "unreachable"}`);
         const text = await res.text();
         const events = text
           .split("\n")

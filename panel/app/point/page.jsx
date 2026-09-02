@@ -103,6 +103,14 @@ export default function Point() {
           / Point it at a task
         </p>
         <h1 className="beats-h2">Point it at a task</h1>
+        <div className="card point-notice" role="status">
+          <span className="micro point-notice-key">Heads up</span>
+          <p className="caption">
+            Solari&apos;s replay generation is down right now (Sep 2, reported to
+            them). New runs still execute every check and commit their manifest
+            and verdict, but the tape may read no tape until they recover.
+          </p>
+        </div>
         <p className="caption runs-intro">
           Up to five pages. For each one: the address, and a word or phrase
           that should be on the page. The recorded cloud browser visits every
