@@ -12,7 +12,7 @@ import { getRegistry } from "../../lib/live";
 export default function Point() {
   const router = useRouter();
   const [name, setName] = useState("");
-  const [rows, setRows] = useState([{ url: "", expect: "" }]);
+  const [rows, setRows] = useState([{ url: "", expect: "", actions: [] }]);
   const [state, setState] = useState("idle"); // idle | running | error
   const [message, setMessage] = useState("");
   const [outage, setOutage] = useState(false); // Solari replay generation down
@@ -56,8 +56,34 @@ export default function Point() {
     setRows((rows) => rows.map((r, j) => (i === j ? { ...r, [key]: value } : r)));
   }
 
+  function addAction(i) {
+    setRows((rows) =>
+      rows.map((r, j) =>
+        i === j && r.actions.length < 3
+          ? { ...r, actions: [...r.actions, { kind: "click", target: "", value: "" }] }
+          : r,
+      ),
+    );
+  }
+
+  function setAction(i, ai, key, value) {
+    setRows((rows) =>
+      rows.map((r, j) =>
+        i === j
+          ? { ...r, actions: r.actions.map((a, k) => (k === ai ? { ...a, [key]: value } : a)) }
+          : r,
+      ),
+    );
+  }
+
+  function removeAction(i, ai) {
+    setRows((rows) =>
+      rows.map((r, j) => (i === j ? { ...r, actions: r.actions.filter((_, k) => k !== ai) } : r)),
+    );
+  }
+
   function addRow() {
-    if (rows.length < 5) setRows((rows) => [...rows, { url: "", expect: "" }]);
+    if (rows.length < 5) setRows((rows) => [...rows, { url: "", expect: "", actions: [] }]);
   }
 
   function removeRow(i) {
@@ -67,7 +93,7 @@ export default function Point() {
   async function submit(e) {
     e.preventDefault();
     const steps = rows
-      .map((r) => ({ url: r.url.trim(), expect: r.expect.trim(), dwellMs: 2000 }))
+      .map((r) => ({ url: r.url.trim(), expect: r.expect.trim(), dwellMs: 2000, actions: r.actions }))
       .filter((r) => r.url);
     if (steps.length === 0) {
       setState("error");
@@ -176,6 +202,52 @@ export default function Point() {
                   onChange={(e) => setRow(i, "expect", e.target.value)}
                 />
               </label>
+              {(row.actions ?? []).map((a, ai) => (
+                <div className="point-action" key={ai}>
+                  <select
+                    className="input point-action-kind"
+                    value={a.kind}
+                    onChange={(e) => setAction(i, ai, "kind", e.target.value)}
+                    aria-label={`Action ${ai + 1} kind`}
+                  >
+                    <option value="click">Click</option>
+                    <option value="type">Type</option>
+                    <option value="press">Press key</option>
+                  </select>
+                  <input
+                    className="input"
+                    type="text"
+                    value={a.target}
+                    placeholder={a.kind === "click" ? "text of the link or button" : a.kind === "type" ? "field label or placeholder" : ""}
+                    onChange={(e) => setAction(i, ai, "target", e.target.value)}
+                    aria-label={`Action ${ai + 1} target`}
+                  />
+                  {a.kind === "type" && (
+                    <input
+                      className="input"
+                      type="text"
+                      value={a.value}
+                      placeholder="text to type"
+                      onChange={(e) => setAction(i, ai, "value", e.target.value)}
+                      aria-label={`Action ${ai + 1} text`}
+                    />
+                  )}
+                  <button
+                    type="button"
+                    className="point-remove"
+                    onClick={() => removeAction(i, ai)}
+                    aria-label={`Remove action ${ai + 1}`}
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+              {(row.actions ?? []).length < 3 && (
+                <button type="button" className="point-addaction" onClick={() => addAction(i)}>
+                  Add an action
+                </button>
+              )}
+
               {rows.length > 1 && (
                 <button
                   type="button"

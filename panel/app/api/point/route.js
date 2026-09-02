@@ -39,11 +39,26 @@ export async function POST(request) {
         { status: 400 },
       );
     }
+    // optional interaction actions: click text, type into a field, press a key
+    const actions = (Array.isArray(s?.actions) ? s.actions : [])
+      .slice(0, 5)
+      .map((a) => {
+        const kind = String(a?.kind ?? "").trim();
+        const target = String(a?.target ?? "").slice(0, 120);
+        const value = String(a?.value ?? "").slice(0, 200);
+        if (!["click", "type", "press"].includes(kind)) return null;
+        if (!target && kind !== "press") return null;
+        if (kind === "type" && !value) return null;
+        if (kind === "press" && !/^[A-Za-z0-9]+$/.test(value)) return null;
+        return { kind, target: target || null, value: value || null };
+      })
+      .filter(Boolean);
     steps.push({
       label: String(s?.label ?? `step ${i + 1}`).slice(0, 60),
       url: url.slice(0, 300),
       expect: s?.expect ? String(s.expect).slice(0, 60) : null,
       dwellMs: Math.min(3000, Math.max(800, Number(s?.dwellMs) || 2000)),
+      actions,
     });
   }
 

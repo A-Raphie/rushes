@@ -450,3 +450,63 @@ body {
 .point-notice { padding: 14px 18px; display: grid; gap: 6px; border-left: 3px solid var(--accent); margin-bottom: 20px; }
 .point-notice + .runs-intro { margin-top: 0; }
 .point-notice-key { color: var(--text-muted); }
+
+/* point: interaction action rows */
+.point-action { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.point-action .input { flex: 1; min-width: 140px; }
+.point-action-kind { width: 130px; flex: none; }
+.point-action .point-remove { min-height: 36px; }
+.point-addaction {
+  background: none;
+  border: none;
+  padding: 0;
+  min-height: 36px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.point-addaction:hover { color: var(--text-primary); }
+
+/* point: interaction action rows */
+.point-action { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.point-action .input { flex: 1; min-width: 140px; }
+.point-action-kind { width: 130px; flex: none; }
+.point-action .point-remove { min-height: 36px; }
+.point-addaction {
+  background: none;
+  border: none;
+  padding: 0;
+  min-height: 36px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.point-addaction:hover { color: var(--text-primary); }
+
+/* point: interaction action rows */
+.point-action { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.point-action .input { flex: 1; min-width: 140px; }
+.point-action-kind { width: 130px; flex: none; }
+.point-action .point-remove { min-height: 36px; }
+.point-addaction {
+  background: none;
+  border: none;
+  padding: 0;
+  min-height: 36px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.point-addaction:hover { color: var(--text-primary); }

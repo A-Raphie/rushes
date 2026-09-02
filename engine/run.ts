@@ -56,11 +56,39 @@ try {
     const startedAt = new Date().toISOString();
     await page.goto(step.url, { waitUntil: "domcontentloaded", timeoutMs: 30000 });
     await page.waitForTimeout(step.dwellMs ?? 1800);
+
+    // optional interaction steps: the agent acts, THEN the check runs on the
+    // post-action page. A failed action fails the step honestly.
+    const actionLog: any[] = [];
+    for (const a of (step.actions ?? []) as any[]) {
+      const kind = a.kind;
+      try {
+        if (kind === "click") {
+          await page.getByText(a.target, { exact: false }).first().click({ timeout: 8000 });
+        } else if (kind === "type") {
+          try {
+            await page.getByLabel(a.target, { exact: false }).first().fill(a.value ?? "", { timeout: 8000 });
+          } catch {
+            await page.getByPlaceholder(a.target, { exact: false }).first().fill(a.value ?? "", { timeout: 8000 });
+          }
+        } else if (kind === "press") {
+          await page.keyboard.press(a.value ?? "Enter");
+        } else {
+          throw new Error(`unknown action kind: ${kind}`);
+        }
+        await page.waitForTimeout(800);
+        actionLog.push({ kind, target: a.target, ok: true });
+      } catch (err: any) {
+        actionLog.push({ kind, target: a.target, ok: false, error: String(err?.message ?? err).slice(0, 120) });
+      }
+    }
+
     const title = await page.title();
     let ok = true;
     if (step.expect) {
       ok = (await page.getByText(step.expect).count()) > 0;
     }
+    const actionsOk = actionLog.every((a) => a.ok);
     steps.push({
       n,
       label: step.label ?? step.url,
@@ -68,10 +96,11 @@ try {
       title,
       startedAt,
       endedAt: new Date().toISOString(),
-      ok,
+      ok: ok && actionsOk,
       expect: step.expect ?? null,
+      actions: actionLog,
     });
-    console.log(`step ${n}: ${step.url} -> "${title}" ${ok ? "OK" : "MISS"}`);
+    console.log(`step ${n}: ${step.url} -> "${title}" ${ok && actionsOk ? "OK" : "MISS"}`);
   }
 } finally {
   await browser.close();
