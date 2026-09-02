@@ -1,0 +1,46 @@
+{
+  "serial": "RUSH-2026-09-02-0004",
+  "createdAt": "2026-09-02T11:32:20.397Z",
+  "task": {
+    "kind": "url-flow",
+    "name": "Unnamed task",
+    "specFile": "specs/web-run.json"
+  },
+  "surface": {
+    "browser": {
+      "sessionId": "ip-10-0-11-50:a3328a11-8b85-464e-836f-7bb0d9d0a855:cmtioo7ko021zo101irjk89q7:1788348740775.YZ6Brd2ZQQXmA20dV1CDYA",
+      "recorded": true,
+      "replayUrl": null,
+      "replayExpiresInSeconds": null,
+      "region": "us-west"
+    },
+    "sandbox": null,
+    "desktop": null
+  },
+  "steps": [
+    {
+      "n": 1,
+      "label": "step 1",
+      "url": "https://exmaples.com/",
+      "title": "",
+      "startedAt": "2026-09-02T11:32:20.976Z",
+      "endedAt": "2026-09-02T11:32:23.510Z",
+      "ok": false,
+      "expect": "title"
+    }
+  ],
+  "verdict": {
+    "outcome": "failed",
+    "summary": "Step 1 failed because it was not marked as successful. The replay was not captured.",
+    "model": "openai/gpt-oss-120b"
+  },
+  "clip": null,
+  "cost": {
+    "solariCredits": 0.0001,
+    "minutesBySurface": {
+      "browser": 0.1
+    }
+  },
+  "tapeBytes": 0,
+  "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0004/tape.ndjson"
+}

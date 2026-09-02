@@ -1,5 +1,22 @@
 [
   {
+    "serial": "RUSH-2026-09-02-0004",
+    "kind": "url-flow",
+    "label": "Unnamed task",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://exmaples.com/"
+    ],
+    "durationSec": 3.1,
+    "tapeBytes": 0,
+    "sessionId": "ip-10-0-11-50:a3328a11-8b85-464e-836f-7bb0d9d0a855:cmtioo7ko021zo101irjk89q7:1788348740775.YZ6Brd2ZQQXmA20dV1CDYA",
+    "verdict": "failed",
+    "summary": "Step 1 failed because it was not marked as successful. The replay was not captured.",
+    "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0004/tape.ndjson",
+    "date": "2026-09-02",
+    "replayCaptured": false
+  },
+  {
     "serial": "RUSH-2026-09-02-0003",
     "kind": "url-flow",
     "label": "Solari product pages live check",
