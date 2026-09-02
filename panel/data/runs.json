@@ -1,5 +1,23 @@
 [
   {
+    "serial": "RUSH-2026-09-02-0001",
+    "kind": "url-flow",
+    "label": "Engine verification: Vercel and GitHub live checks",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://vercel.com/",
+      "https://github.com/"
+    ],
+    "durationSec": 9.5,
+    "tapeBytes": 8194685,
+    "sessionId": "ip-10-0-10-114:2512ab36-e05e-4022-934d-789c8ff23dee:cmtioo7ko021zo101irjk89q7:1788307948530.3CGA0EbekcbbQBHmEl_qyg",
+    "verdict": "verified",
+    "summary": "All checks passed. Vercel home returned ok true and GitHub home returned ok true.",
+    "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0001/tape.ndjson",
+    "date": "2026-09-02",
+    "replayCaptured": true
+  },
+  {
     "serial": "RUSH-2026-09-01-0003",
     "kind": "url-flow",
     "label": "Solari product pages live check",
