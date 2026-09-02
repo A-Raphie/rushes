@@ -1,5 +1,22 @@
 [
   {
+    "serial": "RUSH-2026-09-02-0009",
+    "kind": "url-flow",
+    "label": "Docs click-through: navigation leads to the docs (title match)",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://docs.getsolari.com/"
+    ],
+    "durationSec": 4.5,
+    "tapeBytes": 0,
+    "sessionId": "ip-10-0-10-96:262fdf11-2e94-49b8-97c4-c03101baf0a1:cmtioo7ko021zo101irjk89q7:1788355662594.Tu6D9wkwFjhwmeKCYyHsiQ",
+    "verdict": "failed",
+    "summary": "Navigation passed. The page title was Solari Docs.",
+    "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0009/tape.ndjson",
+    "date": "2026-09-02",
+    "replayCaptured": false
+  },
+  {
     "serial": "RUSH-2026-09-02-0008",
     "kind": "url-flow",
     "label": "Docs click-through: navigation leads to the docs (retry)",
