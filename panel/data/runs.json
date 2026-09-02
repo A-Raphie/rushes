@@ -2,17 +2,19 @@
   {
     "serial": "RUSH-2026-09-02-0003",
     "kind": "url-flow",
-    "label": "Morning check: Pinetree and Solari are up (rerun)",
+    "label": "Solari product pages live check",
     "surface": "cloud chrome · recorded",
     "pages": [
-      "https://pinetree-research.com/",
-      "https://www.getsolari.com/pricing"
+      "https://www.getsolari.com/browsers",
+      "https://www.getsolari.com/sandboxes",
+      "https://www.getsolari.com/desktops",
+      "https://docs.getsolari.com/"
     ],
-    "durationSec": 5.9,
+    "durationSec": 19.4,
     "tapeBytes": 0,
-    "sessionId": "ip-10-0-10-128:f94cda4f-57bb-4835-a50e-6b85504bd7db:cmtioo7ko021zo101irjk89q7:1788339720982.ta-2jzOnQ0jujVorRwFGfw",
+    "sessionId": "ip-10-0-10-128:e4589dc7-e874-4ae7-8366-75843b3f93c0:cmtioo7ko021zo101irjk89q7:1788339981640.ENOi9dQVlOF_tLn05af1JA",
     "verdict": "failed",
-    "summary": "Pinetree research passed (ok true). Solari pricing passed (ok true).",
+    "summary": "All four pages passed. Each step returned ok true.",
     "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0003/tape.ndjson",
     "date": "2026-09-02",
     "replayCaptured": false

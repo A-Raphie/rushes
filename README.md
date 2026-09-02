@@ -44,7 +44,7 @@ latest receipt renders live, for example
 | Capability | Status | Notes |
 |---|---|---|
 | Task composer on the site | works | /point submits; GitHub Actions executes; receipt commits itself |
-| Recorded browser sessions + hosted replay | works | verified Sep 1 on the free tier |
+| Recorded browser sessions + hosted replay | works, replay generation flaky | verified Sep 1; on Sep 2 Solari stopped serving replays for new sessions for hours (runs honestly marked failed; see runs 09-02-0002/0003) |
 | Verdict lines by gpt-oss-120b (Groq) | works | grounded only in captured artifacts; deterministic fallback |
 | Receipt pages per run | works | live from the committed registry |
 | Sandboxes: exec, files, public preview URL | works | verified Sep 1 |

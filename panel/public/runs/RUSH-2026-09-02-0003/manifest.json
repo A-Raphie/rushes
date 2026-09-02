@@ -1,14 +1,14 @@
 {
   "serial": "RUSH-2026-09-02-0003",
-  "createdAt": "2026-09-02T09:02:00.650Z",
+  "createdAt": "2026-09-02T09:06:20.210Z",
   "task": {
     "kind": "url-flow",
-    "name": "Morning check: Pinetree and Solari are up (rerun)",
-    "specFile": "specs/web-run.json"
+    "name": "Solari product pages live check",
+    "specFile": "engine/specs/demo-flow.json"
   },
   "surface": {
     "browser": {
-      "sessionId": "ip-10-0-10-128:f94cda4f-57bb-4835-a50e-6b85504bd7db:cmtioo7ko021zo101irjk89q7:1788339720982.ta-2jzOnQ0jujVorRwFGfw",
+      "sessionId": "ip-10-0-10-128:e4589dc7-e874-4ae7-8366-75843b3f93c0:cmtioo7ko021zo101irjk89q7:1788339981640.ENOi9dQVlOF_tLn05af1JA",
       "recorded": true,
       "replayUrl": null,
       "replayExpiresInSeconds": null,
@@ -20,35 +20,55 @@
   "steps": [
     {
       "n": 1,
-      "label": "pinetree research",
-      "url": "https://pinetree-research.com/",
-      "title": "Pinetree Research",
-      "startedAt": "2026-09-02T09:02:01.236Z",
-      "endedAt": "2026-09-02T09:02:03.800Z",
+      "label": "browsers page",
+      "url": "https://www.getsolari.com/browsers",
+      "title": "Solari",
+      "startedAt": "2026-09-02T09:06:23.652Z",
+      "endedAt": "2026-09-02T09:06:27.274Z",
       "ok": true,
-      "expect": "Pinetree"
+      "expect": "Browser"
     },
     {
       "n": 2,
-      "label": "solari pricing",
-      "url": "https://www.getsolari.com/pricing",
+      "label": "sandboxes page",
+      "url": "https://www.getsolari.com/sandboxes",
       "title": "Solari",
-      "startedAt": "2026-09-02T09:02:03.800Z",
-      "endedAt": "2026-09-02T09:02:06.482Z",
+      "startedAt": "2026-09-02T09:06:27.274Z",
+      "endedAt": "2026-09-02T09:06:30.997Z",
       "ok": true,
-      "expect": "Pricing"
+      "expect": "Sandbox"
+    },
+    {
+      "n": 3,
+      "label": "desktops page",
+      "url": "https://www.getsolari.com/desktops",
+      "title": "Solari",
+      "startedAt": "2026-09-02T09:06:30.997Z",
+      "endedAt": "2026-09-02T09:06:34.543Z",
+      "ok": true,
+      "expect": "Desktop"
+    },
+    {
+      "n": 4,
+      "label": "docs home",
+      "url": "https://docs.getsolari.com/",
+      "title": "Solari Docs",
+      "startedAt": "2026-09-02T09:06:34.543Z",
+      "endedAt": "2026-09-02T09:06:38.197Z",
+      "ok": true,
+      "expect": "Solari"
     }
   ],
   "verdict": {
     "outcome": "failed",
-    "summary": "Pinetree research passed (ok true). Solari pricing passed (ok true).",
+    "summary": "All four pages passed. Each step returned ok true.",
     "model": "openai/gpt-oss-120b"
   },
   "clip": null,
   "cost": {
-    "solariCredits": 0.0002,
+    "solariCredits": 0.0008,
     "minutesBySurface": {
-      "browser": 0.1
+      "browser": 0.3
     }
   },
   "tapeBytes": 0,
