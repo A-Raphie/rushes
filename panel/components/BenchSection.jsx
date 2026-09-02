@@ -31,7 +31,14 @@ export default function BenchSection() {
     let alive = true;
     fetchRegistry()
       .then((registry) => {
-        if (alive && registry?.length) setRun(registry[0]);
+        if (!alive || !registry?.length) return;
+        // the landing features the latest VERIFIED run with a real tape: the
+        // money moment must never show the product failing (audit P0)
+        const featured =
+          registry.find((r) => r.verdict === "verified" && r.tapeBytes > 0) ??
+          registry.find((r) => r.tapeBytes > 0) ??
+          registry[0];
+        setRun(featured);
       })
       .catch(() => {
         if (alive) setFailed(true);

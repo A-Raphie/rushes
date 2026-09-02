@@ -394,3 +394,53 @@ body {
 .skeleton-line.w-60 { width: 60%; }
 .skeleton-line.w-80 { width: 80%; }
 .bench-loading { height: 560px; }
+
+/* point: quiet remove + footer submit row (audit P1/P2) */
+.point-remove {
+  background: none;
+  border: none;
+  padding: 0;
+  min-height: 44px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  justify-self: end;
+}
+.point-remove:hover { color: var(--status-error); }
+.point-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: space-between; }
+
+/* receipts and runs cards are documents: links inherit ink, never UA blue */
+.run-card, .run-card * { color: var(--text-primary); text-decoration: none; }
+.run-card .run-card-label { color: var(--text-secondary); }
+.run-card:hover .serial-stamp { border-color: var(--accent); }
+
+/* designed no-tape frame: the failed run tells the truth without leaking */
+.bench-notape {
+  background: var(--bg-film-raise);
+  border-radius: var(--radius-frame);
+  padding: 48px 32px;
+  text-align: center;
+}
+.bench-notape-mark {
+  display: inline-block;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-input);
+  padding: 6px 14px;
+  margin-bottom: 14px;
+}
+.bench-notape p {
+  max-width: 34em;
+  margin: 0 auto;
+  color: var(--text-on-film);
+  font-size: 15px;
+}
+
+/* no-tape stamp: amber grease pencil on paper screens, muted on dark */
+.verdict-mark.is-notape { color: var(--status-pending); }
+.verdict-mark.is-notape .verdict-text { color: var(--text-primary); }
+[data-theme="projection"] .verdict-mark.is-notape .verdict-text { color: var(--text-on-film); }

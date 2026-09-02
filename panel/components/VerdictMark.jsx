@@ -2,14 +2,19 @@
    Always paired with a text label; color alone is never the signal. */
 const LABELS = {
   verified: "verified",
+  "no-tape": "no tape",
   failed: "failed",
   pending: "pending",
 };
 
-export default function VerdictMark({ verdict, tone = "amber" }) {
-  const label = LABELS[verdict] ?? verdict;
+export default function VerdictMark({ verdict, tapeBytes, tone = "amber" }) {
+  // verdict taxonomy: a run whose checks passed but whose tape never
+  // captured is a "no tape" stamp, not a blank FAILED (audit re-gate P0:
+  // FAILED beside "all pages passed" read as a contradiction)
+  const effective = verdict === "failed" && !(tapeBytes > 0) ? "no-tape" : verdict;
+  const label = LABELS[effective] ?? effective;
   const cls =
-    verdict === "verified" ? "is-pass" : verdict === "failed" ? "is-error" : "is-pending";
+    effective === "verified" ? "is-pass" : effective === "no-tape" ? "is-notape" : effective === "failed" ? "is-error" : "is-pending";
   return (
     <span className={`verdict-mark ${cls} tone-${tone}`}>
       <svg viewBox="0 0 100 44" aria-hidden="true" className="verdict-circle">

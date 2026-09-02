@@ -11,10 +11,7 @@ import ThemeToggle from "../../components/ThemeToggle";
 export default function Point() {
   const router = useRouter();
   const [name, setName] = useState("");
-  const [rows, setRows] = useState([
-    { url: "", expect: "" },
-    { url: "", expect: "" },
-  ]);
+  const [rows, setRows] = useState([{ url: "", expect: "" }]);
   const [state, setState] = useState("idle"); // idle | running | error
   const [message, setMessage] = useState("");
 
@@ -127,7 +124,10 @@ export default function Point() {
 
           {rows.map((row, i) => (
             <fieldset className="point-row" key={i}>
-              <legend className="micro point-key">Page {i + 1}</legend>
+              <legend className="micro point-key">
+                Page {i + 1}
+                {i > 0 ? " · optional" : ""}
+              </legend>
               <label className="point-field">
                 <span className="micro">Visit</span>
                 <input
@@ -152,31 +152,33 @@ export default function Point() {
               {rows.length > 1 && (
                 <button
                   type="button"
-                  className="btn btn-ghost point-remove"
+                  className="point-remove"
                   onClick={() => removeRow(i)}
                   aria-label={`Remove page ${i + 1}`}
                 >
-                  Remove
+                  Remove this page
                 </button>
               )}
             </fieldset>
           ))}
 
-          {rows.length < 5 && (
-            <button type="button" className="btn btn-ghost" onClick={addRow}>
-              Add a page
-            </button>
-          )}
-
-          <hr className="divider" />
-          <div className="point-submit">
+          <div className="point-foot">
+            {rows.length < 5 && (
+              <button type="button" className="btn btn-ghost" onClick={addRow}>
+                Add a page
+              </button>
+            )}
             <button className="btn btn-primary btn-lg" type="submit" disabled={state === "running"}>
               {state === "running" ? "Running on Solari…" : "Run it on Solari"}
             </button>
+          </div>
+
+          <hr className="divider" />
+          <div className="point-submit">
             <span className="caption">
               {state === "running"
-                ? "A recorded cloud browser is executing your task. This takes up to a minute."
-                : "Runs on the Solari free tier · recorded · committed to the public registry"}
+                ? "A recorded cloud browser is executing your task. Typical run: ~20 seconds; the receipt lands within ~2 minutes."
+                : "Typical run: ~20 seconds on the recorded browser · the receipt lands within ~2 minutes · committed to the public registry"}
             </span>
           </div>
           {state === "error" && (

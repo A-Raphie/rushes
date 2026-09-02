@@ -157,7 +157,7 @@ if (process.env.GROQ_API_KEY) {
           {
             role: "system",
             content:
-              "You write the verdict line for a run receipt. Use ONLY the observed facts given. Two sentences max, plain verbs, no em dashes, no superlatives. State what passed or failed and what the evidence is.",
+              "You write the verdict line for a run receipt. Use ONLY the observed facts given. Two sentences max, plain verbs, no em dashes, no superlatives. Never mention raw field names or booleans (say: passed, or: did not show the expected phrase). State what passed or failed and what the evidence is.",
           },
           { role: "user", content: JSON.stringify(facts) },
         ],

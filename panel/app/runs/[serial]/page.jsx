@@ -24,8 +24,11 @@ export default function Receipt() {
       try {
         m = await fetchManifest(serial);
       } catch {
-        // manifest missing from the repo, or GitHub rate-limited: fall back
-        // to the registry copy of this run (same facts, less detail)
+        m = null; // rate limit etc: the registry fallback below still applies
+      }
+      if (!m) {
+        // manifest missing from the repo (pre-archive runs): fall back to the
+        // registry copy of this run. Same facts, less detail.
         try {
           const registry = await getRegistry();
           const entry = registry.find((r) => r.serial === serial);
@@ -42,9 +45,6 @@ export default function Receipt() {
               reconstructed: true,
             };
             fromRegistry = true;
-          } else {
-            if (alive) setState("missing");
-            return;
           }
         } catch {
           if (alive) setState("error");
@@ -71,6 +71,7 @@ export default function Receipt() {
               10,
           ) / 10 ||
           m.cost?.minutesBySurface?.browser * 60 ||
+          m.durationSec ||
           0,
         tapeBytes: m.tapeBytes ?? 0,
         sessionId: m.surface?.browser?.sessionId ?? "",
@@ -163,7 +164,7 @@ export default function Receipt() {
               </dl>
               <hr className="divider" />
               <p className="receipt-verdict">
-                <VerdictMark verdict={run.verdict} tone="amber" />
+                <VerdictMark verdict={run.verdict} tapeBytes={run.tapeBytes} tone="amber" />
                 <span className="receipt-summary">{run.summary}</span>
               </p>
               <hr className="divider" />

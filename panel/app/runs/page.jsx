@@ -73,9 +73,13 @@ export default function Runs() {
                 <Link href={`/runs/${r.serial}`} className="card run-card">
                   <div className="run-card-head">
                     <span className="serial-stamp mono-num">{r.serial}</span>
-                    <VerdictMark verdict={r.verdict} />
+                    <VerdictMark verdict={r.verdict} tapeBytes={r.tapeBytes} />
                   </div>
-                  <p className="run-card-label">{r.summary ?? r.label}</p>
+                  <p className="run-card-label">
+                    {r.verdict === "failed" && r.tapeBytes === 0
+                      ? "No tape was captured: the replay was not ready in time. Re-run this task."
+                      : r.summary ?? r.label}
+                  </p>
                   <dl className="run-card-grid">
                     <div>
                       <dt className="micro">Surface</dt>

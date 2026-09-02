@@ -81,7 +81,7 @@ export default function Bench({ run }) {
         });
         // Poster: park on the last frame so the bench never shows white.
         // The replayer initializes asynchronously, so retry until the seek
-        // actually TOOK (verified by the replayer's own clock) — a single
+        // actually TOOK (verified by the replayer's own clock): a single
         // immediate call silently no-ops, and checking that pause merely
         // exists clears the retry too early (audit + receipt pass).
         const target = metas.length ? metas[metas.length - 1].t : 0;
@@ -185,6 +185,8 @@ export default function Bench({ run }) {
     }
   }
 
+  const noTape = !run.tapeBytes;
+
   return (
     <figure
       className="bench"
@@ -201,18 +203,23 @@ export default function Bench({ run }) {
             <div />
           </div>
         )}
-        {status === "error" && (
-          <p className="bench-error">
-            {run.replayCaptured === false
-              ? "No tape was captured: the replay was not ready within the capture window, so the verdict is failed. Re-run the task."
-              : "The tape did not load. It lives at "}
-            {!run.replayCaptured === false && (
-              <>
-                <code>{run.tapeUrl}</code>: reload, or read{" "}
-                <a href="https://github.com/A-Raphie/rushes/tree/main/docs">the run docs</a>.
-              </>
-            )}
-          </p>
+        {run.tapeBytes === 0 || run.replayCaptured === false ? (
+          <div className="bench-notape" role="status">
+            <span className="micro bench-notape-mark">No tape</span>
+            <p>
+              This run failed before its recording was captured: the replay was
+              not ready within the capture window. Re-run the task to record a
+              fresh tape.
+            </p>
+          </div>
+        ) : (
+          status === "error" && (
+            <p className="bench-error">
+              The tape did not load. It lives at <code>{run.tapeUrl}</code>:
+              reload, or read{" "}
+              <a href="https://github.com/A-Raphie/rushes/tree/main/docs">the run docs</a>.
+            </p>
+          )
         )}
         <div ref={mountRef} className="bench-mount" />
 
