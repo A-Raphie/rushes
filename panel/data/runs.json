@@ -1,5 +1,23 @@
 [
   {
+    "serial": "RUSH-2026-09-02-0002",
+    "kind": "url-flow",
+    "label": "Morning check: Pinetree and Solari are up",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://pinetree-research.com/",
+      "https://www.getsolari.com/pricing"
+    ],
+    "durationSec": 7.2,
+    "tapeBytes": 0,
+    "sessionId": "ip-10-0-10-128:844166fb-30e1-449c-a6c9-6742cf9a4e24:cmtioo7ko021zo101irjk89q7:1788337343902.yVu_vAi5sJ9LPr8e4aMcNg",
+    "verdict": "failed",
+    "summary": "Pinetree passed (step 1 ok). Solari passed (step 2 ok).",
+    "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0002/tape.ndjson",
+    "date": "2026-09-02",
+    "replayCaptured": false
+  },
+  {
     "serial": "RUSH-2026-09-02-0001",
     "kind": "url-flow",
     "label": "Engine verification: Vercel and GitHub live checks",
