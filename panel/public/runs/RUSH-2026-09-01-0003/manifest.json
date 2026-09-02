@@ -1,0 +1,52 @@
+{
+  "serial": "RUSH-2026-09-01-0003",
+  "createdAt": "2026-09-01T00:00:00Z",
+  "task": {
+    "kind": "url-flow",
+    "name": "Solari product pages live check",
+    "origin": "registry-backfill"
+  },
+  "surface": {
+    "browser": {
+      "sessionId": "ip-10-0-11-229:42db5323-46ce-4683-ab25-a9cc6ed300f0:cmtioo7ko021zo101irjk89q7:1788289713868.U1GMYGWXcPCxGfS00Oi4Tg",
+      "recorded": true,
+      "replayUrl": null,
+      "region": "us-west"
+    },
+    "sandbox": null,
+    "desktop": null
+  },
+  "steps": [
+    {
+      "n": 1,
+      "label": "https://www.getsolari.com/browsers",
+      "url": "https://www.getsolari.com/browsers"
+    },
+    {
+      "n": 2,
+      "label": "https://www.getsolari.com/sandboxes",
+      "url": "https://www.getsolari.com/sandboxes"
+    },
+    {
+      "n": 3,
+      "label": "https://www.getsolari.com/desktops",
+      "url": "https://www.getsolari.com/desktops"
+    },
+    {
+      "n": 4,
+      "label": "https://docs.getsolari.com/",
+      "url": "https://docs.getsolari.com/"
+    }
+  ],
+  "verdict": {
+    "outcome": "verified",
+    "summary": "Four pages passed the live check. Each step returned ok true for browsers, sandboxes, desktops, and docs home."
+  },
+  "clip": null,
+  "cost": {
+    "solariCredits": null
+  },
+  "tapeBytes": 1427393,
+  "tapeUrl": "/runs/RUSH-2026-09-01-0003/tape.ndjson",
+  "reconstructed": true
+}

@@ -30,10 +30,11 @@ export function getRegistry() {
 export async function fetchManifest(serial) {
   const safe = encodeURIComponent(serial);
   const res = await fetch(
-    `https://api.github.com/repos/A-Raphie/rushes/contents/runs/${safe}/manifest.json?t=${Date.now()}`,
+    `https://api.github.com/repos/A-Raphie/rushes/contents/panel/public/runs/${safe}/manifest.json?t=${Date.now()}`,
     { cache: "no-store" },
   );
-  if (!res.ok) return null;
+  if (res.status === 404) return null; // genuinely no manifest for this serial
+  if (!res.ok) throw new Error(`manifest ${res.status}`); // rate limit etc: retryable
   const file = await res.json();
   return JSON.parse(b64ToUtf8(file.content));
 }

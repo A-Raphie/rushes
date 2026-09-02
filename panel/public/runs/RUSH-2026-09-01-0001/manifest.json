@@ -1,0 +1,52 @@
+{
+  "serial": "RUSH-2026-09-01-0001",
+  "createdAt": "2026-09-01T00:00:00Z",
+  "task": {
+    "kind": "phase0-verification",
+    "name": "Engine proof: recorded session, replay fetched, tape rendered",
+    "origin": "registry-backfill"
+  },
+  "surface": {
+    "browser": {
+      "sessionId": "ip-10-0-11-12:7934fde3-31a3-45fe-b4ca-20d598647e56:cmtioo7ko021zo101irjk89q7:1788269501680.w3plRHawn4cU0_5Hvx-viQ",
+      "recorded": true,
+      "replayUrl": null,
+      "region": "us-west"
+    },
+    "sandbox": null,
+    "desktop": null
+  },
+  "steps": [
+    {
+      "n": 1,
+      "label": "about:blank",
+      "url": "about:blank"
+    },
+    {
+      "n": 2,
+      "label": "https://example.com/",
+      "url": "https://example.com/"
+    },
+    {
+      "n": 3,
+      "label": "https://news.ycombinator.com/",
+      "url": "https://news.ycombinator.com/"
+    },
+    {
+      "n": 4,
+      "label": "https://getsolari.com/",
+      "url": "https://getsolari.com/"
+    }
+  ],
+  "verdict": {
+    "outcome": "verified",
+    "summary": "3 pages navigated on the recorded cloud browser; 537 KB tape downloaded and the Solari-hosted replay URL resolved after release."
+  },
+  "clip": null,
+  "cost": {
+    "solariCredits": null
+  },
+  "tapeBytes": 537120,
+  "tapeUrl": "/runs/phase0/tape.ndjson",
+  "reconstructed": true
+}

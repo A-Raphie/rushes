@@ -187,6 +187,7 @@ mkdirSync(pubDir, { recursive: true });
 if (tapeBytes > 0) {
   copyFileSync(join(runDir, "tape.ndjson"), join(pubDir, "tape.ndjson"));
 }
+copyFileSync(join(runDir, "manifest.json"), join(pubDir, "manifest.json"));
 const panelRun = {
   serial,
   kind: spec.kind,

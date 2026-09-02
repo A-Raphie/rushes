@@ -7,7 +7,7 @@ import Nav from "../../../components/Nav";
 import Bench from "../../../components/Bench";
 import ThemeToggle from "../../../components/ThemeToggle";
 import VerdictMark from "../../../components/VerdictMark";
-import { fetchManifest } from "../../../lib/live";
+import { fetchManifest, getRegistry } from "../../../lib/live";
 
 /* The receipt: the manifest as a document, the bench playing that run's
    tape. Data is fetched live from the run's committed manifest. */
@@ -18,10 +18,28 @@ export default function Receipt() {
 
   useEffect(() => {
     let alive = true;
-    fetchManifest(serial)
-      .then((m) => {
+    (async () => {
+      let m = null;
+      let fromRegistry = false;
+      try {
+        m = await fetchManifest(serial);
+      } catch {
+        try {
+          // rate limit: fall back to the registry copy of this run
+          const registry = await getRegistry();
+          const entry = registry.find((r) => r.serial === serial);
+          if (entry) {
+            m = { serial: entry.serial, task: { name: entry.label }, createdAt: entry.date, steps: entry.pages.map((u, i) => ({ url: u })), verdict: { outcome: entry.verdict, summary: entry.summary }, tapeBytes: entry.tapeBytes, tapeUrl: entry.tapeUrl, surface: { browser: { sessionId: entry.sessionId } }, reconstructed: true };
+            fromRegistry = true;
+          } else return setState("missing");
+        } catch {
+          return setState("error");
+        }
+      }
+      {
         if (!alive) return;
         if (!m) return setState("missing");
+        if (fromRegistry) m.reconstructed = true;
         setRun({
           serial: m.serial,
           kind: m.task?.kind ?? "url-flow",

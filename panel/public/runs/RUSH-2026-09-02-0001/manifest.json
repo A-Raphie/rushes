@@ -1,0 +1,42 @@
+{
+  "serial": "RUSH-2026-09-02-0001",
+  "createdAt": "2026-09-02T00:00:00Z",
+  "task": {
+    "kind": "url-flow",
+    "name": "Engine verification: Vercel and GitHub live checks",
+    "origin": "registry-backfill"
+  },
+  "surface": {
+    "browser": {
+      "sessionId": "ip-10-0-10-114:2512ab36-e05e-4022-934d-789c8ff23dee:cmtioo7ko021zo101irjk89q7:1788307948530.3CGA0EbekcbbQBHmEl_qyg",
+      "recorded": true,
+      "replayUrl": null,
+      "region": "us-west"
+    },
+    "sandbox": null,
+    "desktop": null
+  },
+  "steps": [
+    {
+      "n": 1,
+      "label": "https://vercel.com/",
+      "url": "https://vercel.com/"
+    },
+    {
+      "n": 2,
+      "label": "https://github.com/",
+      "url": "https://github.com/"
+    }
+  ],
+  "verdict": {
+    "outcome": "verified",
+    "summary": "All checks passed. Vercel home returned ok true and GitHub home returned ok true."
+  },
+  "clip": null,
+  "cost": {
+    "solariCredits": null
+  },
+  "tapeBytes": 8194685,
+  "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0001/tape.ndjson",
+  "reconstructed": true
+}

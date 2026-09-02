@@ -1,0 +1,52 @@
+{
+  "serial": "RUSH-2026-09-01-0002",
+  "createdAt": "2026-09-01T00:00:00Z",
+  "task": {
+    "kind": "url-flow",
+    "name": "Solari product pages live check",
+    "origin": "registry-backfill"
+  },
+  "surface": {
+    "browser": {
+      "sessionId": "ip-10-0-11-229:96c6281c-e03d-401f-b9cd-0c000d90a64b:cmtioo7ko021zo101irjk89q7:1788287050880.Te-M7bqsHPbE9hbfY_5mVQ",
+      "recorded": true,
+      "replayUrl": null,
+      "region": "us-west"
+    },
+    "sandbox": null,
+    "desktop": null
+  },
+  "steps": [
+    {
+      "n": 1,
+      "label": "https://www.getsolari.com/browsers",
+      "url": "https://www.getsolari.com/browsers"
+    },
+    {
+      "n": 2,
+      "label": "https://www.getsolari.com/sandboxes",
+      "url": "https://www.getsolari.com/sandboxes"
+    },
+    {
+      "n": 3,
+      "label": "https://www.getsolari.com/desktops",
+      "url": "https://www.getsolari.com/desktops"
+    },
+    {
+      "n": 4,
+      "label": "https://docs.getsolari.com/",
+      "url": "https://docs.getsolari.com/"
+    }
+  ],
+  "verdict": {
+    "outcome": "verified",
+    "summary": "4/4 checks passed in 18.5s on the recorded cloud browser; tape 1395 KB and the Solari-hosted replay were captured."
+  },
+  "clip": null,
+  "cost": {
+    "solariCredits": null
+  },
+  "tapeBytes": 1428765,
+  "tapeUrl": "/runs/RUSH-2026-09-01-0002/tape.ndjson",
+  "reconstructed": true
+}
