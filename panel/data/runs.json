@@ -1,5 +1,22 @@
 [
   {
+    "serial": "RUSH-2026-09-02-0007",
+    "kind": "url-flow",
+    "label": "Docs click-through: navigation leads to the docs",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://docs.getsolari.com/"
+    ],
+    "durationSec": 5.4,
+    "tapeBytes": 0,
+    "sessionId": "ip-10-0-11-50:c9f72474-330b-4ffa-8072-96b05d994c32:cmtioo7ko021zo101irjk89q7:1788354964193.qG9c9arSMB9aefWaYA8nAQ",
+    "verdict": "failed",
+    "summary": "The navigation to Solari Docs did not pass. The step was reported as a failure.",
+    "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0007/tape.ndjson",
+    "date": "2026-09-02",
+    "replayCaptured": false
+  },
+  {
     "serial": "RUSH-2026-09-02-0006",
     "kind": "url-flow",
     "label": "Outage probe: Node.js and GitHub are up",

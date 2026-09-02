@@ -1,0 +1,53 @@
+{
+  "serial": "RUSH-2026-09-02-0007",
+  "createdAt": "2026-09-02T13:16:03.591Z",
+  "task": {
+    "kind": "url-flow",
+    "name": "Docs click-through: navigation leads to the docs",
+    "specFile": "specs/web-run.json"
+  },
+  "surface": {
+    "browser": {
+      "sessionId": "ip-10-0-11-50:c9f72474-330b-4ffa-8072-96b05d994c32:cmtioo7ko021zo101irjk89q7:1788354964193.qG9c9arSMB9aefWaYA8nAQ",
+      "recorded": true,
+      "replayUrl": null,
+      "replayExpiresInSeconds": null,
+      "region": "us-west"
+    },
+    "sandbox": null,
+    "desktop": null
+  },
+  "steps": [
+    {
+      "n": 1,
+      "label": "home then docs via click",
+      "url": "https://docs.getsolari.com/",
+      "title": "Solari Docs",
+      "startedAt": "2026-09-02T13:16:04.738Z",
+      "endedAt": "2026-09-02T13:16:08.677Z",
+      "ok": false,
+      "expect": "Solari Docs",
+      "actions": [
+        {
+          "kind": "click",
+          "target": "DOCS",
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "verdict": {
+    "outcome": "failed",
+    "summary": "The navigation to Solari Docs did not pass. The step was reported as a failure.",
+    "model": "openai/gpt-oss-120b"
+  },
+  "clip": null,
+  "cost": {
+    "solariCredits": 0.0002,
+    "minutesBySurface": {
+      "browser": 0.1
+    }
+  },
+  "tapeBytes": 0,
+  "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-02-0007/tape.ndjson"
+}
