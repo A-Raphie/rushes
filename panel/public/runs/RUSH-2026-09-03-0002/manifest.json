@@ -1,0 +1,47 @@
+{
+  "serial": "RUSH-2026-09-03-0002",
+  "createdAt": "2026-09-03T20:36:36.137Z",
+  "task": {
+    "kind": "url-flow",
+    "name": "Morning check: our sources are up",
+    "specFile": "specs/web-run.json"
+  },
+  "surface": {
+    "browser": {
+      "sessionId": "ip-10-0-10-40:ff5d9811-0779-43cf-bfd2-0126c4263d2b:cmtioo7ko021zo101irjk89q7:1788467796598.6cpDsaNigfbgR1TOBM7vQQ",
+      "recorded": true,
+      "replayUrl": null,
+      "replayExpiresInSeconds": null,
+      "region": "us-west"
+    },
+    "sandbox": null,
+    "desktop": null
+  },
+  "steps": [
+    {
+      "n": 1,
+      "label": "step 1",
+      "url": "https://nodejs.org/en",
+      "title": "Node.js — Run JavaScript Everywhere",
+      "startedAt": "2026-09-03T20:36:36.950Z",
+      "endedAt": "2026-09-03T20:36:39.449Z",
+      "ok": true,
+      "expect": "Node.js",
+      "actions": []
+    }
+  ],
+  "verdict": {
+    "outcome": "failed",
+    "summary": "The morning check passed. The step returned the title “Node.js — Run JavaScript Everywhere.”",
+    "model": "openai/gpt-oss-120b"
+  },
+  "clip": null,
+  "cost": {
+    "solariCredits": 0.0001,
+    "minutesBySurface": {
+      "browser": 0.1
+    }
+  },
+  "tapeBytes": 0,
+  "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-03-0002/tape.ndjson"
+}
