@@ -1,0 +1,7 @@
+{
+  "kind": "url-flow",
+  "name": "Morning check: our sources are up",
+  "steps": [
+    { "label": "nodejs", "url": "https://nodejs.org", "expect": "Node.js", "dwellMs": 2000 }
+  ]
+}

@@ -144,10 +144,19 @@ let replay = null;
 // Sep 2: Solari-side replay generation was observed down for ~7+ minutes
 // (20 x 3s polls from two environments, all 404). 40 attempts x 3s = ~2min
 // of insurance for slow finalization; a genuinely failed capture still
-// ends in an honest "failed" verdict.
+// ends in an honest "failed" verdict. Sep 3: the SDK can also RETURN an
+// object with a null url while generation is still pending — only accept
+// a poll result that actually carries a url.
 for (let i = 1; i <= 40; i++) {
   try {
-    replay = await solari.sessions.getReplayUrl(sessionId);
+    const res = await solari.sessions.getReplayUrl(sessionId);
+    const url = typeof res === "string" ? res : res?.url;
+    if (!url) {
+      console.log(`replay attempt ${i}: returned empty url, still generating`);
+      await sleep(3000);
+      continue;
+    }
+    replay = res;
     console.log(`replay resolved on attempt ${i}`);
     break;
   } catch (e) {
