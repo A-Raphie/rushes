@@ -1,5 +1,22 @@
 [
   {
+    "serial": "RUSH-2026-09-05-0001",
+    "kind": "url-flow",
+    "label": "Morning check: our sources are up",
+    "surface": "cloud chrome · recorded",
+    "pages": [
+      "https://nodejs.org/en"
+    ],
+    "durationSec": 3.9,
+    "tapeBytes": 0,
+    "sessionId": "ip-10-0-10-40:de01617a-0ff1-4ab5-a2f6-070f1135b16a:cmtioo7ko021zo101irjk89q7:1788642441944.LhyKSircYs-2W8uk7VxOtw",
+    "verdict": "failed",
+    "summary": "The morning check passed. The step loaded the Node.js page titled “Node.js — Run JavaScript Everywhere.”",
+    "tapeUrl": "https://raw.githubusercontent.com/A-Raphie/rushes/main/panel/public/runs/RUSH-2026-09-05-0001/tape.ndjson",
+    "date": "2026-09-05",
+    "replayCaptured": false
+  },
+  {
     "serial": "RUSH-2026-09-03-0002",
     "kind": "url-flow",
     "label": "Morning check: our sources are up",
