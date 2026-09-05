@@ -58,6 +58,11 @@ export default function Receipt() {
         return;
       }
       if (fromRegistry) m.reconstructed = true;
+      // Manifests commit no step wall-clocks and no replayUrl (the presigned
+      // link expires in 15 minutes), so the registry is the authority for
+      // duration and whether a tape was captured at all.
+      const registry = fromRegistry ? [] : await getRegistry().catch(() => []);
+      const entry = registry.find((r) => r.serial === serial);
       setRun({
         serial: m.serial,
         kind: m.task?.kind ?? "url-flow",
@@ -73,6 +78,7 @@ export default function Receipt() {
           ) / 10 ||
           m.cost?.minutesBySurface?.browser * 60 ||
           m.durationSec ||
+          entry?.durationSec ||
           0,
         tapeBytes: m.tapeBytes ?? 0,
         sessionId: m.surface?.browser?.sessionId ?? "",
@@ -80,7 +86,7 @@ export default function Receipt() {
         summary: m.verdict?.summary ?? "",
         tapeUrl: m.tapeUrl,
         date: (m.createdAt ?? "").slice(0, 10),
-        replayCaptured: Boolean(m.surface?.browser?.replayUrl),
+        replayCaptured: (m.tapeBytes ?? 0) > 0,
       });
       setState("ready");
     })();
