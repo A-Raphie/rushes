@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Rabby Wallet Notification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&family=Roboto+Mono:wght@400;500&display=swap" />
+  <style>
+    /* Rebuilt from REAL captures of Rabby 0.94.4 notification windows.
+       Tokens: primary #7084ff, navy #192945, muted #6a7587, borders #e5e9ef,
+       page white, info box #f7fafc, warning #faad14. Fonts Lato + Roboto Mono. */
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: #fff; color: #192945;
+      font: 14px/1.45 Lato, -apple-system, "Segoe UI", sans-serif; overflow: hidden; }
+    .mono { font-family: "Roboto Mono", ui-monospace, Menlo, monospace; }
+    .win { height: 100%; display: flex; flex-direction: column; }
+
+    /* header: rabbit + wordmark, hairline below · as in the real window */
+    .head { flex: none; display: flex; align-items: center; gap: 8px;
+      padding: 13px 16px; background: #fff; border-bottom: 1px solid #f0f0f0; }
+    .head img.logo { width: 18px; height: 18px; border-radius: 4px; }
+    .head .word { font-weight: 700; font-size: 15px; letter-spacing: .2px; }
+    .head .ext { margin-left: auto; color: #b4bdcc; font-size: 11px; font-weight: 600; }
+
+    .body { flex: 1; overflow: hidden; padding: 14px 16px 8px; }
+    h1 { margin: 0 0 4px; font-size: 17px; font-weight: 700; color: #192945; }
+
+    .netrow { display: flex; align-items: center; gap: 6px; margin: 6px 0 2px;
+      font-weight: 600; font-size: 13px; color: #3e495e; }
+    .netdot { width: 8px; height: 8px; border-radius: 50%; background: #7084ff; }
+    .chev { color: #b4bdcc; font-size: 10px; }
+
+    .org { display: flex; align-items: center; gap: 7px; margin: 8px 0 4px; }
+    .org img, .org .fav { width: 16px; height: 16px; border-radius: 3px; }
+    .fav { background: #e5e9ef; color: #3e495e; font-size: 9px; font-weight: 700;
+      display: grid; place-items: center; }
+    .org .url { font-size: 12.5px; color: #6a7587; word-break: break-all; }
+
+    .rows { margin-top: 6px; }
+    .row { display: flex; justify-content: space-between; align-items: center;
+      padding: 9px 2px; border-bottom: 1px solid #f5f6f8; font-size: 13px; }
+    .row .k { color: #6a7587; }
+    .row .v { color: #192945; font-weight: 600; }
+
+    .acct-label { margin: 12px 0 6px; font-size: 13px; color: #6a7587; }
+    .acct-box { display: flex; align-items: center; gap: 10px;
+      border: 1px solid #e5e9ef; border-radius: 8px; padding: 9px 12px; background: #fff; }
+    .av { width: 26px; height: 26px; border-radius: 50%; background: #7084ff; color: #fff;
+      display: grid; place-items: center; font-weight: 700; font-size: 12px; flex: none; }
+    .acct-box .who { min-width: 0; }
+    .acct-box .name { font-weight: 600; font-size: 13px; }
+    .acct-box .addr { font-size: 11px; color: #6a7587; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; }
+    .acct-box .chev { margin-left: auto; }
+
+    .label { font-size: 12.5px; font-weight: 600; color: #6a7587; margin: 0 0 6px; }
+    .data { background: #f7fafc; border: 1px solid #e5e9ef; border-radius: 8px;
+      padding: 10px 12px; margin: 4px 0 10px; }
+    pre { margin: 0; font: 11px/1.5 "Roboto Mono", ui-monospace, Menlo, monospace;
+      color: #3e495e; white-space: pre-wrap; word-break: break-all; max-height: 120px; overflow: hidden; }
+
+    .typehead { display: flex; justify-content: space-between; align-items: center;
+      margin: 2px 0 10px; }
+    .typehead h2 { margin: 0; font-size: 15px; font-weight: 700; color: #192945; }
+    .viewraw { color: #7084ff; font-size: 12.5px; font-weight: 600; }
+
+    .actions { flex: none; padding: 12px 16px 14px; background: #fff; border-top: 1px solid #f0f0f0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .actions.stack { grid-template-columns: 1fr; }
+    button { height: 40px; border-radius: 8px; font: 700 14px Lato, sans-serif; cursor: pointer; }
+    .primary { background: #7084ff; color: #fff; border: 0; }
+    .primary.done { background: #34d399; color: #063; }
+    .second { background: #fff; color: #3e495e; border: 1px solid #d9d9d9; }
+
+    /* security alert banner · present in the real connect capture */
+    .alert { display: flex; align-items: center; gap: 8px; margin: 10px 0 0;
+      background: #fff7e6; border: 1px solid #ffe58f; border-radius: 8px;
+      padding: 8px 10px; font-size: 12px; color: #6a7587; }
+    .alert .ign { margin-left: auto; color: #7084ff; font-weight: 700; white-space: nowrap; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="win">
+    <div class="head">
+      <img class="logo" alt="" src="data:image/png;base64,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" />
+      <span class="word">Rabby</span>
+      <span class="ext">NOTIFICATION</span>
+    </div>
+    <div class="body">
+      <div id="connect">
+        <h1>Connect to Dapp</h1>
+        <div class="netrow"><span class="netdot" id="netMark"></span><span id="connectChain">Ethereum</span><span class="chev">▾</span></div>
+        <div class="org"><span class="fav" id="favFallback">P</span><span class="url" id="origin">example.com</span></div>
+        <div class="rows">
+          <div class="row"><span class="k">Listed by</span><span class="v">None</span></div>
+          <div class="row"><span class="k">Site popularity</span><span class="v">Very Low</span></div>
+          <div class="row"><span class="k">My mark</span><span class="v">No mark</span></div>
+        </div>
+        <div class="acct-label">Connect Address</div>
+        <div class="acct-box">
+          <span class="av" id="av1">A</span>
+          <span class="who">
+            <span class="name" id="acct">Account 1</span>
+            <span class="addr mono" id="acct2">0x…</span>
+          </span>
+          <span class="chev">▾</span>
+        </div>
+        <div class="alert">⚠ Please process the alert before signing<span class="ign">Ignore all</span></div>
+      </div>
+
+      <div id="sign" class="hidden">
+        <div class="org"><span class="fav" id="favFallback2">P</span><span class="url" id="origin2">example.com</span></div>
+        <div class="typehead"><h2>Unknown Signature Type</h2><span class="viewraw">View Raw &gt;</span></div>
+        <div class="label">Sign Text</div>
+        <div class="data"><pre id="txjson">{ "to": "0x…" }</pre></div>
+        <div class="acct-box" style="margin-bottom:10px">
+          <span class="av" id="av2">A</span>
+          <span class="who">
+            <span class="name" id="acctSign">Account 1</span>
+            <span class="addr mono" id="acctAddr">0x…</span>
+          </span>
+        </div>
+        <div class="row"><span class="k">Estimated fee</span><span class="v mono" id="gasLine">$0</span></div>
+      </div>
+    </div>
+    <div class="actions" id="actions">
+      <button class="second" type="button">Cancel</button>
+      <button class="primary" id="btnAction" type="button">Connect</button>
+    </div>
+  </div>
+  <script>
+    const qs = new URLSearchParams(location.search);
+    const mode = qs.get("mode") || "connect";
+    const site = qs.get("site") || "example.com";
+    const chain = qs.get("chain") || "Ethereum";
+    const account = qs.get("account") || "Account 1";
+    const addr = qs.get("addr") || "0x…";
+    const gas = qs.get("gas") || "$0";
+    const tx = qs.get("tx") || '{ "to": "0x…" }';
+    document.getElementById("connect").classList.toggle("hidden", mode !== "connect");
+    document.getElementById("sign").classList.toggle("hidden", mode !== "sign");
+    for (const id of ["origin", "origin2"]) document.getElementById(id).textContent = site;
+    for (const id of ["favFallback", "favFallback2"]) document.getElementById(id).textContent = site.charAt(0).toUpperCase();
+    document.getElementById("connectChain").textContent = chain;
+    document.getElementById("acct").textContent = account;
+    document.getElementById("acct2").textContent = addr;
+    document.getElementById("acctSign").textContent = account;
+    document.getElementById("acctAddr").textContent = addr;
+    document.getElementById("av1").textContent = account.charAt(0).toUpperCase();
+    document.getElementById("av2").textContent = account.charAt(0).toUpperCase();
+    document.getElementById("gasLine").textContent = gas;
+    document.getElementById("txjson").textContent = tx;
+    const btn = document.getElementById("btnAction");
+    const actions = document.getElementById("actions");
+    btn.id = mode === "sign" ? "btnSign" : "btnConnect";
+    btn.textContent = mode === "sign" ? "Sign" : "Connect";
+    if (mode === "connect") actions.classList.add("stack");
+    btn.addEventListener("click", () => { btn.classList.add("done"); btn.textContent = "Approved"; });
+  </script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+{
+  "driver": "http://127.0.0.1:9333",
+  "cdp": "http://127.0.0.1:9222",
+  "voDir": "/tmp/rushes-demo/beats",
+  "outDir": "/tmp/rushes-demo",
+  "final": "/Users/raphie/Documents/Hackathons/rushes/demo-video/final.mp4",
+  "recorder": "avfoundation",
+  "avDevice": 2,
+  "avScale": 2,
+  "cursorPark": "0,1111",
+  "tails": {
+    "4": 0.9,
+    "5": 0.4,
+    "6": 0.3
+  },
+  "locators": {
+    "cellGithub": "[...document.querySelectorAll('.frame-cell')][1]",
+    "cellVercel": "[...document.querySelectorAll('.frame-cell')][0]",
+    "serialStamp": "document.querySelector('.serial-stamp')",
+    "manifestCard": "document.querySelector('.receipt')",
+    "nameInput": "document.querySelector('.point-label input')",
+    "urlInput": "document.querySelector('.point-row input[type=url]')",
+    "expectInput": "document.querySelector('.point-row input[type=text]')",
+    "heroCta": "[...document.querySelectorAll('a,button')].find(e => /point it at a task/i.test(e.textContent))"
+  },
+  "scenes": {
+    "1": {
+      "name": "hero",
+      "prep": [
+        {
+          "t": "goto",
+          "url": "https://tryrushes.vercel.app/"
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        }
+      ],
+      "actions": [
+        {
+          "t": "cmove",
+          "x": 1160,
+          "y": 560
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        },
+        {
+          "t": "wheel",
+          "dy": 450
+        },
+        {
+          "t": "hold",
+          "ms": 3000
+        },
+        {
+          "t": "wheel",
+          "dy": 450
+        },
+        {
+          "t": "hold",
+          "ms": 3000
+        },
+        {
+          "t": "cmove",
+          "x": 1300,
+          "y": 620
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        }
+      ]
+    },
+    "2": {
+      "name": "bench",
+      "prep": [
+        {
+          "t": "goto",
+          "url": "https://tryrushes.vercel.app/"
+        },
+        {
+          "t": "hold",
+          "ms": 2000
+        },
+        {
+          "t": "wheel",
+          "dy": 900
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        }
+      ],
+      "actions": [
+        {
+          "t": "hold",
+          "ms": 3000
+        },
+        {
+          "t": "hoverJs",
+          "find": "serialStamp"
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        },
+        {
+          "t": "cmove",
+          "x": 855,
+          "y": 870
+        },
+        {
+          "t": "hold",
+          "ms": 1200
+        },
+        {
+          "t": "clickJs",
+          "find": "cellGithub"
+        },
+        {
+          "t": "hold",
+          "ms": 3000
+        },
+        {
+          "t": "clickJs",
+          "find": "cellVercel"
+        },
+        {
+          "t": "hold",
+          "ms": 3500
+        },
+        {
+          "t": "cmove",
+          "x": 1000,
+          "y": 700
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        }
+      ]
+    },
+    "3": {
+      "name": "composer",
+      "prep": [
+        {
+          "t": "goto",
+          "url": "https://tryrushes.vercel.app/point"
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        }
+      ],
+      "actions": [
+        {
+          "t": "clickJs",
+          "find": "nameInput"
+        },
+        {
+          "t": "typeJs",
+          "find": "nameInput",
+          "text": "Morning check: our sources are up"
+        },
+        {
+          "t": "hold",
+          "ms": 1500
+        },
+        {
+          "t": "clickJs",
+          "find": "urlInput"
+        },
+        {
+          "t": "typeJs",
+          "find": "urlInput",
+          "text": "https://nodejs.org"
+        },
+        {
+          "t": "hold",
+          "ms": 1500
+        },
+        {
+          "t": "clickJs",
+          "find": "expectInput"
+        },
+        {
+          "t": "typeJs",
+          "find": "expectInput",
+          "text": "Node.js"
+        },
+        {
+          "t": "hold",
+          "ms": 3000
+        }
+      ]
+    },
+    "4": {
+      "name": "receipt",
+      "prep": [
+        {
+          "t": "goto",
+          "url": "https://tryrushes.vercel.app/runs/RUSH-2026-09-02-0001"
+        },
+        {
+          "t": "hold",
+          "ms": 3500
+        }
+      ],
+      "actions": [
+        {
+          "t": "hold",
+          "ms": 3500
+        },
+        {
+          "t": "hoverJs",
+          "find": "serialStamp"
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        },
+        {
+          "t": "cmove",
+          "x": 855,
+          "y": 700
+        },
+        {
+          "t": "hold",
+          "ms": 800
+        },
+        {
+          "t": "wheel",
+          "dy": 750
+        },
+        {
+          "t": "hold",
+          "ms": 2000
+        },
+        {
+          "t": "hoverJs",
+          "find": "manifestCard"
+        },
+        {
+          "t": "hold",
+          "ms": 3500
+        }
+      ]
+    },
+    "5": {
+      "name": "registry",
+      "prep": [
+        {
+          "t": "goto",
+          "url": "https://tryrushes.vercel.app/runs"
+        },
+        {
+          "t": "hold",
+          "ms": 3500
+        }
+      ],
+      "actions": [
+        {
+          "t": "hold",
+          "ms": 2500
+        },
+        {
+          "t": "wheel",
+          "dy": 350
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        },
+        {
+          "t": "wheel",
+          "dy": 350
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        },
+        {
+          "t": "cmove",
+          "x": 855,
+          "y": 600
+        },
+        {
+          "t": "hold",
+          "ms": 3000
+        }
+      ]
+    },
+    "6": {
+      "name": "close",
+      "prep": [
+        {
+          "t": "goto",
+          "url": "https://tryrushes.vercel.app/"
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        }
+      ],
+      "actions": [
+        {
+          "t": "cmove",
+          "x": 1300,
+          "y": 640
+        },
+        {
+          "t": "hold",
+          "ms": 4000
+        },
+        {
+          "t": "hoverJs",
+          "find": "heroCta"
+        },
+        {
+          "t": "hold",
+          "ms": 2500
+        },
+        {
+          "t": "cmove",
+          "x": 1160,
+          "y": 560
+        },
+        {
+          "t": "hold",
+          "ms": 3000
+        }
+      ]
+    }
+  }
+}

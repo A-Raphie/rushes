@@ -1,0 +1,130 @@
+[
+  {
+    "name": "landing_hero",
+    "t": 9
+  },
+  {
+    "name": "cursor_in",
+    "t": 9.6
+  },
+  {
+    "name": "hero_hold",
+    "t": 18.9
+  },
+  {
+    "name": "bench_in",
+    "t": 21.8
+  },
+  {
+    "name": "bench_hold",
+    "t": 33.1
+  },
+  {
+    "name": "to_strip",
+    "t": 33.7
+  },
+  {
+    "name": "scrub_1",
+    "t": 35.3
+  },
+  {
+    "name": "scrub_1_hold",
+    "t": 41.4
+  },
+  {
+    "name": "scrub_2",
+    "t": 42.4
+  },
+  {
+    "name": "bench_settle",
+    "t": 54.1
+  },
+  {
+    "name": "composer",
+    "t": 58.1
+  },
+  {
+    "name": "named",
+    "t": 61.6
+  },
+  {
+    "name": "named_hold",
+    "t": 65.1
+  },
+  {
+    "name": "url_typed",
+    "t": 66.7
+  },
+  {
+    "name": "url_hold",
+    "t": 70.6
+  },
+  {
+    "name": "expect_typed",
+    "t": 71.8
+  },
+  {
+    "name": "composer_hold",
+    "t": 76.8
+  },
+  {
+    "name": "receipt_page",
+    "t": 86.6
+  },
+  {
+    "name": "slate_hold",
+    "t": 91.6
+  },
+  {
+    "name": "serial_zoom",
+    "t": 92.3
+  },
+  {
+    "name": "unzoomed",
+    "t": 95.3
+  },
+  {
+    "name": "post_zoom",
+    "t": 96.8
+  },
+  {
+    "name": "manifest_card",
+    "t": 98.3
+  },
+  {
+    "name": "manifest_hold",
+    "t": 105.3
+  },
+  {
+    "name": "registry",
+    "t": 111.9
+  },
+  {
+    "name": "registry_hold",
+    "t": 115.9
+  },
+  {
+    "name": "registry_scroll",
+    "t": 118.2
+  },
+  {
+    "name": "registry_settle",
+    "t": 128.6
+  },
+  {
+    "name": "close",
+    "t": 133.1
+  },
+  {
+    "name": "close_drift",
+    "t": 133.7
+  },
+  {
+    "name": "close_hold",
+    "t": 146.4
+  },
+  {
+    "name": "end_card",
+    "t": 149.9
+  }
+]

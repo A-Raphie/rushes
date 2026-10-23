@@ -1,0 +1,11 @@
+An agent just finished a job on the web. It visited pages, it read the words on them, and it reported back that everything passed. But can you prove any of that actually happened? A screenshot proves nothing. A claim proves less. Most demos can't prove it at all. This is Rushes: every agent run leaves a receipt you can audit.
+
+This is not a screenshot, and it is not my screen recording. It is the actual recording of a Solari cloud browser doing the job, rendered from the bytes captured while it worked, and committed to a public repo for anyone to read. The slate carries the serial, the surface, and the size of the tape. The verdict is stamped. And it plays.
+
+Pointing it at a task takes one form. Name the task, give it up to five pages, and the words that should be on them. The composer takes actions too: clicks, typing, key presses, in order, so a run can walk a whole flow instead of staring at one page. Then you send it on its way.
+
+One click, and the machinery does the rest. GitHub Actions runs the recorded engine on Solari's cloud browser, and the receipt writes itself: every step, every timing, the size of the tape in kilobytes, and a verdict grounded in what the steps actually observed. Here is a real one. All checks passed, verified, with the tape attached.
+
+And when the infrastructure fails, the registry says so. Run after run failed during a real replay outage, marked no tape, with the reason stated plainly on every card. The checks still executed and the manifests still committed, but the tape is missing, and the registry admits it. A receipts product that hides that would be a receipts product.
+
+Rushes: every agent run leaves a receipt you can audit. The tape is real, the manifest is public, and the verdict is grounded in captured evidence, not claims. The site, the source, and the full registry are on screen right now. Point it at your agent's next job, and see what it leaves behind.

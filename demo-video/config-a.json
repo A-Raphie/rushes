@@ -1,0 +1,21 @@
+{
+  "site": "https://tryrushes.vercel.app",
+  "viewport": { "width": 1280, "height": 920 },
+  "selectors": {
+    "submitBtn": ".point-foot .btn-primary",
+    "nameField": ".point-label input",
+    "urlField": ".point-row input[type=url]",
+    "expectField": ".point-row input[type=text]"
+  },
+  "scenes": [
+    { "action": "goto_frame", "path": "/", "wait": 7000, "mark": "landing_hero" },
+    { "action": "move", "x": 640, "y": 500, "steps": 20, "wait": 300, "mark": "cursor_in" },
+    { "action": "scroll", "distance": 900, "steps": 7, "interval": 320, "wait": 6000, "mark": "bench_playing" },
+    { "action": "goto_frame", "path": "/point", "wait": 3000, "mark": "composer" },
+    { "action": "type", "selector": "nameField", "text": "Morning check: our sources are up", "mark": "named" },
+    { "action": "type", "selector": "urlField", "text": "https://nodejs.org", "mark": "url_typed" },
+    { "action": "type", "selector": "expectField", "text": "Node.js", "mark": "expect_typed" },
+    { "action": "wait", "duration": 2500, "mark": "composer_hold" }
+  ],
+  "chrome": {}
+}

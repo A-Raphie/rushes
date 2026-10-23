@@ -1,0 +1,55 @@
+{
+  "site": "https://tryrushes.vercel.app",
+  "viewport": { "width": 1280, "height": 920 },
+  "selectors": {
+    "submitBtn": ".point-foot .btn-primary",
+    "nameField": ".point-label input",
+    "urlField": ".point-row input[type=url]",
+    "expectField": ".point-row input[type=text]",
+    "receiptCard": ".receipt",
+    "serialLine": ".serial-stamp",
+    "cellGithub": ".frame-cell:nth-of-type(2)",
+    "cellVercel": ".frame-cell:nth-of-type(1)"
+  },
+  "scenes": [
+    { "action": "goto_frame", "path": "/", "wait": 7000, "mark": "landing_hero" },
+    { "action": "move", "x": 640, "y": 500, "steps": 20, "wait": 300, "mark": "cursor_in" },
+    { "action": "wait", "duration": 9000, "mark": "hero_hold" },
+    { "action": "scroll", "distance": 900, "steps": 7, "interval": 400, "wait": 7000, "mark": "bench_in" },
+
+    { "action": "wait", "duration": 4000, "mark": "bench_hold" },
+    { "action": "move", "x": 640, "y": 780, "steps": 18, "wait": 400, "mark": "to_strip" },
+    { "action": "click", "selector": "cellGithub", "wait": 2500, "mark": "scrub_1" },
+    { "action": "wait", "duration": 3500, "mark": "scrub_1_hold" },
+    { "action": "click", "selector": "cellVercel", "wait": 2500, "mark": "scrub_2" },
+    { "action": "wait", "duration": 9000, "mark": "bench_settle" },
+
+    { "action": "goto_frame", "path": "/point", "wait": 3500, "mark": "composer" },
+    { "action": "type", "selector": "nameField", "text": "Morning check: our sources are up", "mark": "named" },
+    { "action": "wait", "duration": 3000, "mark": "named_hold" },
+    { "action": "type", "selector": "urlField", "text": "https://nodejs.org", "mark": "url_typed" },
+    { "action": "wait", "duration": 3000, "mark": "url_hold" },
+    { "action": "type", "selector": "expectField", "text": "Node.js", "mark": "expect_typed" },
+    { "action": "wait", "duration": 4500, "mark": "composer_hold" },
+
+    { "action": "goto_frame", "path": "/runs/RUSH-2026-09-02-0001", "wait": 8000, "mark": "receipt_page" },
+    { "action": "wait", "duration": 5000, "mark": "slate_hold" },
+    { "action": "zoom", "selector": "serialLine", "level": 1.8, "hold": 1800, "mark": "serial_zoom" },
+    { "action": "unzoom", "mark": "unzoomed" },
+    { "action": "wait", "duration": 1500, "mark": "post_zoom" },
+    { "action": "scroll", "distance": 750, "steps": 5, "interval": 300, "wait": 5000, "mark": "manifest_card" },
+    { "action": "wait", "duration": 2000, "mark": "manifest_hold" },
+
+    { "action": "goto_frame", "path": "/runs", "wait": 6000, "mark": "registry" },
+    { "action": "wait", "duration": 4000, "mark": "registry_hold" },
+    { "action": "scroll", "distance": 600, "steps": 6, "interval": 380, "wait": 6000, "mark": "registry_scroll" },
+    { "action": "wait", "duration": 4000, "mark": "registry_settle" },
+
+    { "action": "goto_frame", "path": "/", "wait": 4000, "mark": "close" },
+    { "action": "move", "x": 900, "y": 620, "steps": 22, "wait": 400, "mark": "close_drift" },
+    { "action": "wait", "duration": 12000, "mark": "close_hold" }
+  ],
+  "endCard": "data:text/html,<body style='margin:0;display:grid;place-items:center;height:100vh;background:%230f1514;font-family:monospace'><div style='text-align:center'><div style='color:%23f5b301;font-size:34px;letter-spacing:6px'>RUSHES</div><div style='color:%23e7e7e2;margin-top:14px;font-size:15px'>every agent run leaves a receipt you can audit</div><div style='color:%23939599;margin-top:22px;font-size:13px'>tryrushes.vercel.app &middot; github.com/A-Raphie/rushes</div></div></body>",
+  "chrome": {},
+  "thumbnailAt": "serial_zoom"
+}
